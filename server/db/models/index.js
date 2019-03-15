@@ -8,7 +8,7 @@ const Card = require('./card')
  *    BlogPost.belongsTo(User)
  */
 
-//  User.hasMany(Card, {foreignKey: senderId})
+//  User.hasMany(Card, {foreignKey: "senderId"})
 //  User.hasMany(Card, {foreignKey: receiverId})
 /**
  * We'll export all of our models here, so that any time a module needs a model,
