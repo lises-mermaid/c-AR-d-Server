@@ -42,62 +42,62 @@ async function seed() {
 
   const cardTemplates = await Promise.all([
     CardTemplate.create({
-      orientation: 'h',
+      orientation: 'H',
       occasion: 'Birthday',
       picture: 'example.com'
     }),
     CardTemplate.create({
-      orientation: 'v',
+      orientation: 'V',
       occasion: 'Birthday',
       picture: 'example.com'
     }),
     CardTemplate.create({
-      orientation: 'h',
+      orientation: 'H',
       occasion: 'Wedding',
       picture: 'example.com'
     }),
     CardTemplate.create({
-      orientation: 'v',
+      orientation: 'V',
       occasion: 'Wedding',
       picture: 'example.com'
     }),
     CardTemplate.create({
-      orientation: 'h',
+      orientation: 'H',
       occasion: 'Retirment',
       picture: 'example.com'
     }),
     CardTemplate.create({
-      orientation: 'v',
+      orientation: 'V',
       occasion: 'Retirment',
       picture: 'example.com'
     }),
     CardTemplate.create({
-      orientation: 'h',
+      orientation: 'H',
       occasion: 'Baby Shower',
       picture: 'example.com'
     }),
     CardTemplate.create({
-      orientation: 'v',
+      orientation: 'V',
       occasion: 'Baby Shower',
       picture: 'example.com'
     }),
     CardTemplate.create({
-      orientation: 'h',
+      orientation: 'H',
       occasion: 'Anniversary',
       picture: 'example.com'
     }),
     CardTemplate.create({
-      orientation: 'v',
+      orientation: 'V',
       occasion: 'Anniversary',
       picture: 'example.com'
     }),
     CardTemplate.create({
-      orientation: 'h',
+      orientation: 'H',
       occasion: 'Farewell',
       picture: 'example.com'
     }),
     CardTemplate.create({
-      orientation: 'v',
+      orientation: 'V',
       occasion: 'Farewell',
       picture: 'example.com'
     })
