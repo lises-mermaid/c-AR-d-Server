@@ -108,42 +108,42 @@ async function seed() {
       senderId: 1,
       receiverId: 2,
       cardTemplateId: 1,
-      QRCode: 'placeholder',
+      qrCode: 'placeholder',
       video: 'example.com'
     }),
     Card.create({
       senderId: 2,
       receiverId: 3,
       cardTemplateId: 2,
-      QRCode: 'placeholder',
+      qrCode: 'placeholder',
       video: 'example.com'
     }),
     Card.create({
       senderId: 3,
       receiverId: 4,
       cardTemplateId: 3,
-      QRCode: 'placeholder',
+      qrCode: 'placeholder',
       video: 'example.com'
     }),
     Card.create({
       senderId: 4,
       receiverId: 5,
       cardTemplateId: 4,
-      QRCode: 'placeholder',
+      qrCode: 'placeholder',
       video: 'example.com'
     }),
     Card.create({
       senderId: 5,
       receiverId: 6,
       cardTemplateId: 5,
-      QRCode: 'placeholder',
+      qrCode: 'placeholder',
       video: 'example.com'
     }),
     Card.create({
       senderId: 6,
       receiverId: 1,
       cardTemplateId: 6,
-      QRCode: 'placeholder',
+      qrCode: 'placeholder',
       video: 'example.com'
     })
   ])
