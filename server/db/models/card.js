@@ -2,9 +2,10 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Card = db.define('card', {
-  id: {
+  uuid: {
     primaryKey: true,
-    type: Sequelize.UUID
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4
   },
   senderId: {
     type: Sequelize.INTEGER
