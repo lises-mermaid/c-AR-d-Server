@@ -34,28 +34,3 @@ router.get('/recieved', async (req, res, next) => {
     next(err)
   }
 })
-
-router.get('/video', async (req, res, next) => {
-  try {
-    const uploadFile = () => {
-      fs.readFile(fileName, (err, data) => {
-        if (err) throw err
-        const params = {
-          Bucket: 'c-ar-d-videos',
-          Key: 'video-123', // file will be saved as testBucket/contacts.csv
-          Body: JSON.stringify(data, null, 2)
-        }
-        s3.upload(params, function(s3Err, data) {
-          if (s3Err) {
-            throw s3Err
-          }
-          console.log(`File uploaded successfully at ${data.Location}`)
-        })
-      })
-    }
-    uploadFile()
-    res.json(cards)
-  } catch (err) {
-    next(err)
-  }
-})
