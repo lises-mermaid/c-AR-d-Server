@@ -7,22 +7,6 @@ const Card = db.define('card', {
     type: Sequelize.UUID,
     defaultValue: Sequelize.UUIDV4
   },
-  senderId: {
-    type: Sequelize.INTEGER
-    // references: {
-    //   model: 'User',
-    //   key: 'id',
-    //   as: 'senderId',
-    // }
-  },
-  recieverId: {
-    type: Sequelize.INTEGER
-    // references: {
-    //   model: 'User',
-    //   key: 'id',
-    //   as: 'receiverId',
-    // }
-  },
   qrCode: {
     type: Sequelize.STRING
   },
