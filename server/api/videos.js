@@ -1,56 +1,43 @@
 const router = require('express').Router()
 const fs = require('fs')
 const AWS = require('aws-sdk')
-const Busboy = require('busboy')
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-})
-const {User, Card} = require('../db/models')
+const multer = require('multer')
+const multerS3 = require('multer-s3')
+
 module.exports = router
 
-function uploadToS3(file) {
-  let s3bucket = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    Bucket: 'c-ar-d-videos'
-  })
-  s3bucket.createBucket(function() {
-    var params = {
-      Bucket: 'BUCKET_TEST',
-      Key: file.name,
-      Body: file.data
-    }
-    s3bucket.upload(params, function(err, data) {
-      if (err) {
-        console.log('error in callback')
-        console.log(err)
-      }
-      console.log('success')
-      console.log(data)
-    })
-  })
-}
-
-router.get('/', function(req, res, next) {
-  res.send('hi')
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: 'us-east-1'
 })
 
-router.post('/upload', function(req, res, next) {
-  //const element1 = req.body.element1
-  console.log(req.body)
-  // var busboy = new Busboy({headers: req.headers})
+s3 = new AWS.S3()
 
-  // The file upload has completed
-  //busboy.on('finish', function() {
-  console.log('Upload finished')
-  // Grabs your file object from the request.
-  //const file = req.files.element2
-  // console.log(file, "HEEEOLLO")
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'c-ar-d-videos',
+    acl: 'public-read',
+    metadata: function(req, file, cb) {
+      cb(null, {fieldName: file.fieldname})
+    },
+    key: function(req, file, cb) {
+      console.log('THIS IS A FILE: ', file)
+      cb(null, file.originalname)
+    }
+  })
+})
 
-  // Begins the upload to the AWS S3
-  // uploadToS3(file)
-  //})
+const singleUpload = upload.single('image')
 
-  //req.pipe(busboy);
+router.post('/upload', function(req, res) {
+  singleUpload(req, res, function(err, some) {
+    if (err) {
+      return res
+        .status(422)
+        .send({errors: [{title: 'Image Upload Error', detail: err.message}]})
+    }
+    return res.json({imageUrl: req.file.location})
+  })
 })
