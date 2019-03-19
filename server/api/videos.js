@@ -23,7 +23,6 @@ const upload = multer({
       cb(null, {fieldName: file.fieldname})
     },
     key: function(req, file, cb) {
-      console.log('THIS IS A FILE: ', file)
       cb(null, file.originalname)
     }
   })
