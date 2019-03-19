@@ -1,18 +1,14 @@
 const User = require('./user')
+const CardTemplate = require('./cardtemplate')
+const Card = require('./card')
 
-/**
- * If we had any associations to make, this would be a great place to put them!
- * ex. if we had another model called BlogPost, we might say:
- *
- *    BlogPost.belongsTo(User)
- */
+CardTemplate.hasMany(Card)
+Card.belongsTo(CardTemplate)
+User.hasMany(Card, {as: 'senderId', foreignKey: 'senderId'})
+User.hasMany(Card, {as: 'receiverId', foreignKey: 'receiverId'})
 
-/**
- * We'll export all of our models here, so that any time a module needs a model,
- * we can just require it from 'db/models'
- * for example, we can say: const {User} = require('../db/models')
- * instead of: const User = require('../db/models/user')
- */
 module.exports = {
-  User
+  User,
+  CardTemplate,
+  Card
 }

@@ -1,18 +1,156 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, CardTemplate, Card} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({
+      username: 'Cody',
+      email: 'cody@email.com',
+      password: '123'
+    }),
+    User.create({
+      username: 'Murphy',
+      email: 'murphy@email.com',
+      password: '123'
+    }),
+    User.create({
+      username: 'Lisa',
+      email: 'lisa@email.com',
+      password: '123'
+    }),
+    User.create({
+      username: 'Jordyn',
+      email: 'jordyn@email.com',
+      password: '123'
+    }),
+    User.create({
+      username: 'Rachel',
+      email: 'rachel@email.com',
+      password: '123'
+    }),
+    User.create({
+      username: 'Bell',
+      email: 'bell@email.com',
+      password: '123'
+    })
+  ])
+
+  const cardTemplates = await Promise.all([
+    CardTemplate.create({
+      orientation: 'H',
+      occasion: 'Birthday',
+      picture: 'example.com'
+    }),
+    CardTemplate.create({
+      orientation: 'V',
+      occasion: 'Birthday',
+      picture: 'example.com'
+    }),
+    CardTemplate.create({
+      orientation: 'H',
+      occasion: 'Wedding',
+      picture: 'example.com'
+    }),
+    CardTemplate.create({
+      orientation: 'V',
+      occasion: 'Wedding',
+      picture: 'example.com'
+    }),
+    CardTemplate.create({
+      orientation: 'H',
+      occasion: 'Retirment',
+      picture: 'example.com'
+    }),
+    CardTemplate.create({
+      orientation: 'V',
+      occasion: 'Retirment',
+      picture: 'example.com'
+    }),
+    CardTemplate.create({
+      orientation: 'H',
+      occasion: 'Baby Shower',
+      picture: 'example.com'
+    }),
+    CardTemplate.create({
+      orientation: 'V',
+      occasion: 'Baby Shower',
+      picture: 'example.com'
+    }),
+    CardTemplate.create({
+      orientation: 'H',
+      occasion: 'Anniversary',
+      picture: 'example.com'
+    }),
+    CardTemplate.create({
+      orientation: 'V',
+      occasion: 'Anniversary',
+      picture: 'example.com'
+    }),
+    CardTemplate.create({
+      orientation: 'H',
+      occasion: 'Farewell',
+      picture: 'example.com'
+    }),
+    CardTemplate.create({
+      orientation: 'V',
+      occasion: 'Farewell',
+      picture: 'example.com'
+    })
+  ])
+
+  const cards = await Promise.all([
+    Card.create({
+      senderId: 1,
+      receiverId: 2,
+      cardTemplateId: 1,
+      qrCode: 'placeholder',
+      video: 'example.com'
+    }),
+    Card.create({
+      senderId: 2,
+      receiverId: 3,
+      cardTemplateId: 2,
+      qrCode: 'placeholder',
+      video: 'example.com'
+    }),
+    Card.create({
+      senderId: 3,
+      receiverId: 4,
+      cardTemplateId: 3,
+      qrCode: 'placeholder',
+      video: 'example.com'
+    }),
+    Card.create({
+      senderId: 4,
+      receiverId: 5,
+      cardTemplateId: 4,
+      qrCode: 'placeholder',
+      video: 'example.com'
+    }),
+    Card.create({
+      senderId: 5,
+      receiverId: 6,
+      cardTemplateId: 5,
+      qrCode: 'placeholder',
+      video: 'example.com'
+    }),
+    Card.create({
+      senderId: 6,
+      receiverId: 1,
+      cardTemplateId: 6,
+      qrCode: 'placeholder',
+      video: 'example.com'
+    })
   ])
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${cardTemplates.length} cardTemplates`)
+  console.log(`seeded ${cards.length} cards`)
   console.log(`seeded successfully`)
 }
 
