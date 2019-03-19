@@ -15,6 +15,10 @@ const Card = db.define('card', {
     validate: {
       isUrl: true
     }
+  },
+  message: {
+    type: Sequelize.TEXT,
+    allowNull: true
   }
 })
 
