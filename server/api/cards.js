@@ -31,14 +31,14 @@ router.post('/create', async (req, res, next) => {
   }
 })
 
-router.get('/recieved', async (req, res, next) => {
+router.get('/received', async (req, res, next) => {
   try {
-    const cards = await Card.findAll({
-      where: {
-        recieverId: req.user.id
-      }
-    })
-    res.json(cards)
+    // const cards = await Card.findAll({
+    //   where: {
+    //     receiverId: req.user.id
+    //   }
+    // })
+    res.json('cards')
   } catch (err) {
     next(err)
   }
