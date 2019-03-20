@@ -3,7 +3,12 @@ const fs = require('fs')
 const AWS = require('aws-sdk')
 const multer = require('multer')
 const multerS3 = require('multer-s3')
+const {Card} = require('../db/models')
+// crypto
 const crypto = require('crypto')
+const algorithm = 'aes-256-cbc'
+const key = crypto.randomBytes(32)
+const iv = crypto.randomBytes(16)
 
 module.exports = router
 
@@ -40,12 +45,45 @@ const upload = multer({
 const singleUpload = upload.single('video')
 
 router.post('/upload', function(req, res) {
-  singleUpload(req, res, function(err, some) {
+  singleUpload(req, res, async function(err, some) {
     if (err) {
       return res
         .status(422)
         .send({errors: [{title: 'Video Upload Error', detail: err.message}]})
     }
-    return res.json({videoUrl: req.file.location})
+    const row = await Card.create({
+      senderId: req.body.senderId,
+      message: req.body.message,
+      cardTemplateId: req.body.cardTemplateId,
+      video: req.file.location
+    })
+    console.log(row.uuid)
+    // generate encrypted url
+
+    return res.json(row)
   })
 })
+
+router.get('/stream', async (req, res, next) => {
+  const qrCode = req.body.qrCode
+})
+
+function encrypt(text) {
+  let cipher = crypto.createCipheriv(algorithm, Buffer.from(key), iv)
+  let encrypted = cipher.update(text)
+  encrypted = Buffer.concat([encrypted, cipher.final()])
+  return JSON.stringify({
+    iv: iv.toString('hex'),
+    encryptedData: encrypted.toString('hex')
+  })
+}
+
+function decrypt(text) {
+  text = JSON.parse(text)
+  let iv = Buffer.from(text.iv, 'hex')
+  let encryptedText = Buffer.from(text.encryptedData, 'hex')
+  let decipher = crypto.createDecipheriv(algorithm, Buffer.from(key), iv)
+  let decrypted = decipher.update(encryptedText)
+  decrypted = Buffer.concat([decrypted, decipher.final()])
+  return decrypted.toString()
+}
