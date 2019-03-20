@@ -37,15 +37,15 @@ const upload = multer({
   })
 })
 
-const singleUpload = upload.single('image')
+const singleUpload = upload.single('video')
 
 router.post('/upload', function(req, res) {
   singleUpload(req, res, function(err, some) {
     if (err) {
       return res
         .status(422)
-        .send({errors: [{title: 'Image Upload Error', detail: err.message}]})
+        .send({errors: [{title: 'Video Upload Error', detail: err.message}]})
     }
-    return res.json({imageUrl: req.file.location})
+    return res.json({videoUrl: req.file.location})
   })
 })
