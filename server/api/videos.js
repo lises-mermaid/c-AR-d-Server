@@ -3,6 +3,7 @@ const fs = require('fs')
 const AWS = require('aws-sdk')
 const multer = require('multer')
 const multerS3 = require('multer-s3')
+const crypto = require('crypto')
 
 module.exports = router
 
@@ -23,7 +24,15 @@ const upload = multer({
       cb(null, {fieldName: file.fieldname})
     },
     key: function(req, file, cb) {
-      cb(null, file.originalname)
+      // cb(null, file.originalname)
+      cb(
+        null,
+        crypto
+          .randomBytes(16)
+          .toString('base64')
+          .replace('/', '') + file.originalname
+      )
+      console.log(file)
     }
   })
 })

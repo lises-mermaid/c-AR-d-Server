@@ -8,10 +8,12 @@ const Card = db.define('card', {
     defaultValue: Sequelize.UUIDV4
   },
   qrCode: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    isUnique: true
   },
   video: {
     type: Sequelize.STRING,
+    isUnique: true,
     validate: {
       isUrl: true
     }

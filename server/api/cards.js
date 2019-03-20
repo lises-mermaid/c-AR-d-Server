@@ -17,6 +17,20 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.post('/create', async (req, res, next) => {
+  try {
+    await Card.create({
+      senderId: req.body.senderId,
+      qrCode: req.body.qrCode,
+      video: req.body.video,
+      message: req.body.message
+    })
+    res.sendStatus(201)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/recieved', async (req, res, next) => {
   try {
     const cards = await Card.findAll({
