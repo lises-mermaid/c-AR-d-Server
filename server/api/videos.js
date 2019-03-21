@@ -57,15 +57,24 @@ router.post('/upload', function(req, res) {
       cardTemplateId: req.body.cardTemplateId,
       video: req.file.location
     })
-    console.log(row.uuid)
-    // generate encrypted url
-
-    return res.json(row)
+    // generate qrCode string
+    const qrCode = `http://localhost:8080/api/videos/stream/${row.uuid}`
+    row.update({qrCode})
+    return res.json({uri: row.video})
   })
 })
 
-router.get('/stream', async (req, res, next) => {
-  const qrCode = req.body.qrCode
+router.get('/stream/:uuid', async (req, res, next) => {
+  try {
+    const data = await Card.findOne({
+      where: {
+        uuid: req.params.uuid
+      }
+    })
+    res.json({video: data.video})
+  } catch (err) {
+    next(err)
+  }
 })
 
 function encrypt(text) {
