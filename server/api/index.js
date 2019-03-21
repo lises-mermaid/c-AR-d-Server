@@ -8,6 +8,7 @@ router.use(express.urlencoded({extended: true}))
 
 router.use('/users', require('./users'))
 router.use('/cards', require('./cards'))
+router.use('/cardTemplates', require('./cardTemplates'))
 router.use('/videos', require('./videos'))
 
 router.use((req, res, next) => {

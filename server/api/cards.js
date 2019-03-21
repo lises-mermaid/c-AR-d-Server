@@ -1,7 +1,5 @@
 const router = require('express').Router()
-const fs = require('fs')
-const AWS = require('aws-sdk')
-const {User, Card} = require('../db/models')
+const {Card} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
