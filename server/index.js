@@ -47,6 +47,9 @@ const createApp = () => {
   // compression middleware
   app.use(compression())
 
+  app.use(express.json())
+  app.use(express.urlencoded({extended: true}))
+
   // session middleware with passport
   app.use(
     session({
