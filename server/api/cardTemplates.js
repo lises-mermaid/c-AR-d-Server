@@ -1,13 +1,11 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {CardTemplate} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll({
-      attributes: ['id', 'email', 'username']
-    })
-    res.json(users)
+    const cardTemplates = await CardTemplate.findAll()
+    res.json(cardTemplates)
   } catch (err) {
     next(err)
   }

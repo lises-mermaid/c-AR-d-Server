@@ -3,6 +3,7 @@ module.exports = router
 
 router.use('/users', require('./users'))
 router.use('/cards', require('./cards'))
+router.use('/cardTemplates', require('./cardTemplates'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')

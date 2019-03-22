@@ -44,12 +44,11 @@ const createApp = () => {
   // logging middleware
   app.use(morgan('dev'))
 
-  // body parsing middleware
-  app.use(express.json())
-  app.use(express.urlencoded({extended: true}))
-
   // compression middleware
   app.use(compression())
+
+  app.use(express.json())
+  app.use(express.urlencoded({extended: true}))
 
   // session middleware with passport
   app.use(
