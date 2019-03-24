@@ -3,18 +3,18 @@ import axios from 'axios'
 //ACTION TYPES
 
 const GET_ALL_SENT_CARDS = 'GET_ALL_SENT_CARDS'
-const SET_NEW_CARD_TEMPLATE = 'SET_NEW_CARD_TEMPLATE'
+const SET_NEW_CARD_TEMPLATE_ID = 'SET_NEW_CARD_TEMPLATE_ID'
 const SET_NEW_CARD_MESSAGE = 'SET_NEW_CARD_MESSAGE'
-const SET_NEW_CARD_VIDEO = 'SET_NEW_CARD_VIDEO'
 const CLEAR_NEW_CARD_DATA = 'CLEAR_NEW_CARD_DATA'
+const GET_SINGLE_CARD = 'GET_SINGLE_CARD'
 
 //INITIAL STATE
 
 const initialState = {
   sentCards: [],
-  newCardTemplate: 0,
+  newCardTemplateId: 0,
   newCardMessage: '',
-  newCardVideo: {}
+  singleCard: {}
 }
 
 //ACTION CREATORS
@@ -24,23 +24,23 @@ const getAllSentCards = cards => ({
   cards
 })
 
-export const setNewCardTemplate = id => ({
-  type: SET_NEW_CARD_TEMPLATE,
+const getSingleCard = card => ({
+  type: GET_SINGLE_CARD,
+  card
+})
+
+export const setNewCardTemplateId = id => ({
+  type: SET_NEW_CARD_TEMPLATE_ID,
   id
 })
 
-export const setNewCardMessase = message => ({
+export const setNewCardMessage = message => ({
   type: SET_NEW_CARD_MESSAGE,
   message
 })
 
-export const setNewCardVideo = video => ({
-  type: SET_NEW_CARD_VIDEO,
-  video
-})
-
 export const clearNewCardData = () => ({
-  type: SET_NEW_CARD_VIDEO
+  type: CLEAR_NEW_CARD_DATA
 })
 
 //THUNKS
@@ -54,10 +54,19 @@ export const getAllSentCardsThunk = () => async dispatch => {
   }
 }
 
-export const createNewCardThunk = () => async dispatch => {
+export const createNewCardThunk = (
+  cardTemplateId,
+  message,
+  video
+) => async dispatch => {
   try {
-    const {data} = await axios.post('/api/cards/create')
+    const {data} = await axios.post('/api/cards/create', {
+      cardTemplateId,
+      message,
+      video
+    })
     dispatch(clearNewCardData())
+    dispatch(getSingleCard(data))
   } catch (err) {
     console.error(err)
   }
@@ -67,8 +76,14 @@ export const createNewCardThunk = () => async dispatch => {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_ALL_RECEIVED_CARDS:
+    case GET_ALL_SENT_CARDS:
       return {...state, sentCards: action.cards}
+    case SET_NEW_CARD_TEMPLATE_ID:
+      return {...state, newCardTemplateId: action.newCardTemplateId}
+    case SET_NEW_CARD_MESSAGE:
+      return {...state, newCardMessage: action.newCardMessage}
+    case CLEAR_NEW_CARD_DATA:
+      return {...state, newCardTemplateId: 0, newCardMessage: ''}
     default:
       return state
   }

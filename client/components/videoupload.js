@@ -1,13 +1,10 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {createNewCardThunk} from '../store'
 
 class VideoUploader extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      uploadStatus: false
-    }
     this.handleUploadImage = this.handleUploadImage.bind(this)
   }
 
@@ -16,6 +13,11 @@ class VideoUploader extends Component {
     const data = new FormData()
     data.append('file', this.uploadInput.files[0])
     data.append('filename', this.fileName.value)
+    this.props.addVideoToState(
+      this.props.cardTemplateId,
+      this.props.message,
+      data
+    )
   }
 
   render() {
@@ -44,7 +46,7 @@ class VideoUploader extends Component {
           </div>
           <br />
           <div>
-            <button type="submit">Upload</button>
+            <button type="submit">Create Card</button>
           </div>
         </form>
       </div>
@@ -52,8 +54,14 @@ class VideoUploader extends Component {
   }
 }
 
-export default connect(null, null)(VideoUploader)
+const mapStateToProps = state => ({
+  cardTemplateId: state.cardTemplateId,
+  message: state.message
+})
 
-VideoUploader.propTypes = {
-  uploadStatus: PropTypes.bool.isRequired
-}
+const mapDispatchToProps = dispatch => ({
+  createCard: (cardTemplateId, message, video) =>
+    dispatch(createNewCardThunk(cardTemplateId, message, video))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(VideoUploader)
