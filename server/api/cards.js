@@ -4,12 +4,29 @@ const AWS = require('aws-sdk')
 const multer = require('multer')
 const multerS3 = require('multer-s3')
 const crypto = require('crypto')
-const qrCode = require('qrcode')
 const fs = require('fs')
-const PDFDocumentCard = require('pdfkit')
-const nodemailer = require('nodemailer')
+
+const qrImage = require('qr-image')
+const text2png = require('text2png')
+const jimp = require('jimp')
 
 module.exports = router
+
+const generatePic = template => {
+  const images = [template, 'temp/QRCode.png', 'temp/message.png']
+  let jimps = []
+
+  for (let i = 0; i < images.length; i++) {
+    jimps.push(jimp.read(images[i]))
+  }
+  Promise.all(jimps).then(function(data) {
+    data[0].composite(data[1], 160, 520)
+    data[0].composite(data[2], 20, 40)
+    data[0].write('temp/card.png', function() {
+      console.log('wrote the image')
+    })
+  })
+}
 
 router.get('/', async (req, res, next) => {
   try {
@@ -41,14 +58,13 @@ const upload = multer({
       cb(null, {fieldName: file.fieldname})
     },
     key: function(req, file, cb) {
-      // cb(null, file.originalname)
-      cb(
-        null,
-        crypto
-          .randomBytes(16)
-          .toString('base64')
-          .replace('/', '') + file.originalname
-      )
+      let salt = crypto
+        .randomBytes(16)
+        .toString('base64')
+        .replace('/', '')
+        .replace('\\', '')
+
+      cb(null, 'videos/' + salt + file.originalname)
       console.log(file)
     }
   })
@@ -73,7 +89,27 @@ router.post('/create', function(req, res) {
     const qrCodeLink = `http://localhost:8080/api/cards/scan/${row.uuid}`
     row.update({qrCodeLink})
 
-    generatePDF(row.cardTemplate, row.message, row.video)
+    // generate QRCode and Text images
+    async function createQRFile() {
+      return new Promise(resolve => {
+        const writeToFile = fs.createWriteStream('temp/QRCode.png')
+        qrImage.image(qrCodeLink, {type: 'png', size: 4}).pipe(writeToFile)
+        writeToFile.on('finish', resolve)
+      })
+    }
+    await createQRFile()
+
+    fs.writeFileSync(
+      'temp/message.png',
+      text2png(row.message, {
+        color: 'blue',
+        font: '32px "Comic Sans MS", cursive, sans-serif'
+      })
+    )
+
+    generatePic(
+      'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/rabbit.png'
+    )
 
     return res.json({uri: row.video})
   })
@@ -109,91 +145,3 @@ router.get('/received', async (req, res, next) => {
     next(err)
   }
 })
-
-const generatePDF = (cardTemplate, message, video, email) => {
-  // var qrSvg = qr.image(video, { type: 'svg' });
-
-  //   qrSvg.pipe(require('fs').createWriteStream('i_love_qr.svg'));
-
-  //   var svgString = qr.imageSync('I love QR!', { type: 'svg' });
-  //   console.log(qrSvg)
-  //   console.log(svgString)
-  var imgUrl
-  var opts = {
-    errorCorrectionLevel: 'H',
-    type: 'image/jpeg',
-    rendererOpts: {
-      quality: 0.3
-    }
-  }
-  qrCode.create(message, opts)
-  qrCode.toCanvas('testing')
-  qrCode.toDataURL(message, opts, function(err, url) {
-    if (err) throw err
-
-    imgUrl = url
-    console.log(imgUrl[0], 'qr LINK')
-  })
-
-  const doc = new PDFDocumentCard()
-
-  // let buffers = [];
-  // doc.on('data', buffers.push.bind(buffers));
-  // doc.on('end', () => {
-
-  //     let pdfData = Buffer.concat(buffers);
-
-  //     const mailOptions = {
-  //         from: 'jtoahacoding@gmail.com',
-  //         to: 'jtoahacoding@gmail.com',
-  //         attachments: [{
-  //             filename: 'attachment.pdf',
-  //             content: pdfData
-  //         }]
-  //     };
-
-  //     mailOptions.subject = 'PDF in mail';
-  //     mailOptions.text = 'PDF attached';
-  //     return mailTransporter.sendMail(mailOptions).then(() => {
-  //         console.log('email sent:');
-  //     }).catch(error => {
-  //         console.error('There was an error while sending the email:', error);
-  //     });
-
-  // });
-
-  // Pipe its output somewhere, like to a file or HTTP response
-  // See below for browser usage
-  doc.pipe(fs.createWriteStream('card.pdf'))
-
-  doc.fontSize(25).text('Happy Birthday!', 100, 100)
-  // Embed a font, set the font size, and render some text
-  doc.fontSize(25).text(message, 100, 100)
-
-  // Add an image, constrain it to a given size, and center it vertically and horizontally
-  // doc.image(imgUrl, {
-  //   //  fit: [250, 300],
-  //    align: 'center',
-  //    valign: 'center'
-  // });
-
-  // Draw a triangle
-  doc
-    .save()
-    .moveTo(100, 150)
-    .lineTo(100, 250)
-    .lineTo(200, 250)
-    .fill('#FF3300')
-
-  // // Add some text with annotations
-  // doc.addPage()
-  //    .fillColor("blue")
-  //    .text('Here is a link!', 100, 100)
-  //    .underline(100, 100, 160, 27, {color: "#0000FF"})
-  //    .link(100, 100, 160, 27, 'http://google.com/');
-
-  // Finalize PDF file
-
-  doc.end()
-  //console.log("START", doc)
-}
