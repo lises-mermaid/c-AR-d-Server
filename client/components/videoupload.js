@@ -54,4 +54,6 @@ class VideoUploader extends Component {
 
 export default connect(null, null)(VideoUploader)
 
-VideoUploader.propTypes = {}
+VideoUploader.propTypes = {
+  uploadStatus: PropTypes.bool.isRequired
+}
