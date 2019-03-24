@@ -52,7 +52,6 @@
     "nodemailer": "^5.1.1",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
-    "pdfkit": "^0.9.0",
     "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",
     "prop-types": "^15.6.2",
