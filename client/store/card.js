@@ -29,7 +29,7 @@ export const setNewCardTemplate = id => ({
   id
 })
 
-export const setNewCardMessase = message => ({
+export const setNewCardMessage = message => ({
   type: SET_NEW_CARD_MESSAGE,
   message
 })
@@ -40,14 +40,14 @@ export const setNewCardVideo = video => ({
 })
 
 export const clearNewCardData = () => ({
-  type: SET_NEW_CARD_VIDEO
+  type: CLEAR_NEW_CARD_DATA
 })
 
 //THUNKS
 
 export const getAllSentCardsThunk = () => async dispatch => {
   try {
-    const {data} = await axios.get('/api/cards')
+    const {data} = await axios.get('/api/cards/cardhistory')
     dispatch(getAllSentCards(data))
   } catch (err) {
     console.error(err)
@@ -67,7 +67,7 @@ export const createNewCardThunk = () => async dispatch => {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_ALL_RECEIVED_CARDS:
+    case GET_ALL_SENT_CARDS:
       return {...state, sentCards: action.cards}
     default:
       return state

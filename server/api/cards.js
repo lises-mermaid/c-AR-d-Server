@@ -7,12 +7,17 @@ const crypto = require('crypto')
 
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+router.get('/cardhistory', async (req, res, next) => {
   try {
     const cards = await Card.findAll({
       where: {
         senderId: req.user.id
-      }
+      },
+      include: [
+        {
+          model: CardTemplate
+        }
+      ]
     })
     res.json(cards)
   } catch (err) {
