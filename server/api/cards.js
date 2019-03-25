@@ -18,6 +18,7 @@ router.get('/', async (req, res, next) => {
 })
 
 router.post('/create', function(req, res) {
+  // comment this to test with video upload
   videoUpload(req, res, async function(err) {
     if (err) {
       return res
@@ -45,12 +46,47 @@ router.post('/create', function(req, res) {
       cardTemplate.picture,
       qrCodeLink,
       card.message,
-      {x: 1400, y: 900}, // qr postion
-      {x: 1200, y: 360} // message position
+      {x: cardTemplate.qrX, y: cardTemplate.qrY}, // qr postion
+      {x: cardTemplate.msgX, y: cardTemplate.msgY} // message position
     )
 
     return res.json({uri: card.video})
   })
+
+  // uncomment this to test without video upload
+
+  // try {
+  //   const card = await Card.create({
+  //     senderId: req.body.senderId,
+  //     message: req.body.message,
+  //     cardTemplateId: req.body.cardTemplateId
+  //     // video: req.file.location
+  //   })
+  //   // generate qrCode string
+  //   const qrCodeLink = `http://localhost:8080/api/cards/scan/${card.uuid}`
+  //   card.update({qrCodeLink})
+
+  //   // find cardTemplate link
+  //   const cardTemplate = await CardTemplate.findOne({
+  //     where: {
+  //       id: card.cardTemplateId
+  //     }
+  //   })
+
+  //   // generate QRCode and Text images
+  //   await generatePic(
+  //     cardTemplate.picture,
+  //     qrCodeLink,
+  //     card.message,
+  //     {x: cardTemplate.qrX, y: cardTemplate.qrY}, // qr postion
+  //     {x: cardTemplate.msgX, y: cardTemplate.msgY} // message position
+  //   )
+
+  //   // return res.json({uri: card.video})
+  //   res.json({uri: card.video})
+  // } catch (err) {
+  //   next(err)
+  // }
 })
 
 router.get('/scan/:uuid', async (req, res, next) => {
