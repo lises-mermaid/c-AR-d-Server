@@ -45,95 +45,159 @@ async function seed() {
       orientation: 'H',
       occasion: 'Birthday',
       picture:
-        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/birthday1.png'
+        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/birthday1.png',
+      qrX: 1420,
+      qrY: 950,
+      msgX: 1200,
+      msgY: 360
     }),
     CardTemplate.create({
       orientation: 'H',
       occasion: 'Birthday',
       picture:
-        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/birthday2.png'
+        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/birthday2.png',
+      qrX: 1420,
+      qrY: 890,
+      msgX: 1200,
+      msgY: 360
     }),
     CardTemplate.create({
       orientation: 'V',
       occasion: 'Birthday',
       picture:
-        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/birthday3.png'
+        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/birthday3.png',
+      qrX: 420,
+      qrY: 1750,
+      msgX: 275,
+      msgY: 1400
     }),
     CardTemplate.create({
       orientation: 'H',
       occasion: 'Birthday',
       picture:
-        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/birthday4.png'
+        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/birthday4.png',
+      qrX: 1400,
+      qrY: 900,
+      msgX: 1200,
+      msgY: 360
     }),
     CardTemplate.create({
       orientation: 'H',
       occasion: 'Wedding',
       picture:
-        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/wedding1.png'
+        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/wedding1.png',
+      qrX: 1400,
+      qrY: 900,
+      msgX: 1200,
+      msgY: 360
     }),
     CardTemplate.create({
       orientation: 'H',
       occasion: 'Wedding',
       picture:
-        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/wedding2.png'
+        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/wedding2.png',
+      qrX: 1400,
+      qrY: 900,
+      msgX: 1200,
+      msgY: 360
     }),
     CardTemplate.create({
       orientation: 'V',
       occasion: 'Wedding',
       picture:
-        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/wedding3.png'
+        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/wedding3.png',
+      qrX: 420,
+      qrY: 1750,
+      msgX: 275,
+      msgY: 1400
     }),
     CardTemplate.create({
       orientation: 'V',
       occasion: 'Wedding',
       picture:
-        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/wedding4.png'
+        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/wedding4.png',
+      qrX: 420,
+      qrY: 1750,
+      msgX: 275,
+      msgY: 1400
     }),
     CardTemplate.create({
       orientation: 'H',
       occasion: 'Retirement',
       picture:
-        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/retirement1.png'
+        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/retirement1.png',
+      qrX: 1400,
+      qrY: 900,
+      msgX: 1200,
+      msgY: 360
     }),
     CardTemplate.create({
       orientation: 'V',
       occasion: 'Retirement',
       picture:
-        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/retirement2.png'
+        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/retirement2.png',
+      qrX: 420,
+      qrY: 1750,
+      msgX: 275,
+      msgY: 1400
     }),
     CardTemplate.create({
       orientation: 'V',
       occasion: 'Baby Shower',
-      picture: 'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/baby1.png'
+      picture: 'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/baby1.png',
+      qrX: 420,
+      qrY: 1750,
+      msgX: 275,
+      msgY: 1400
     }),
     CardTemplate.create({
       orientation: 'H',
       occasion: 'Baby Shower',
-      picture: 'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/baby2.png'
+      picture: 'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/baby2.png',
+      qrX: 1400,
+      qrY: 900,
+      msgX: 1200,
+      msgY: 360
     }),
     CardTemplate.create({
       orientation: 'H',
       occasion: 'Anniversary',
       picture:
-        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/anniversary1.png'
+        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/anniversary1.png',
+      qrX: 1400,
+      qrY: 900,
+      msgX: 1200,
+      msgY: 360
     }),
     CardTemplate.create({
       orientation: 'V',
       occasion: 'Anniversary',
       picture:
-        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/anniversary2.png'
+        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/anniversary2.png',
+      qrX: 420,
+      qrY: 1750,
+      msgX: 275,
+      msgY: 1400
     }),
     CardTemplate.create({
       orientation: 'H',
       occasion: 'Farewell',
       picture:
-        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/farewell1.png'
+        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/farewell1.png',
+      qrX: 1400,
+      qrY: 900,
+      msgX: 1200,
+      msgY: 360
     }),
     CardTemplate.create({
       orientation: 'V',
       occasion: 'Farewell',
       picture:
-        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/farewell2.png'
+        'https://s3.amazonaws.com/c-ar-d-videos/cardTemplates/farewell2.png',
+      qrX: 420,
+      qrY: 1750,
+      msgX: 275,
+      msgY: 1400
     })
   ])
 

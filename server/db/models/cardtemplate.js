@@ -16,6 +16,22 @@ const CardTemplate = db.define('cardTemplate', {
     validate: {
       isUrl: true
     }
+  },
+  qrX: {
+    type: Sequelize.INTEGER,
+    defaultValue: 20
+  },
+  qrY: {
+    type: Sequelize.INTEGER,
+    defaultValue: 20
+  },
+  msgX: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
+  msgY: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 })
 
