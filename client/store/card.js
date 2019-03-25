@@ -77,19 +77,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_SENT_CARDS:
       return {...state, sentCards: action.cards}
-    case SET_NEW_CARD_TEMPLATE:
-      return {...state, newCardTemplate: action.cardTemplate}
     case SET_NEW_CARD_MESSAGE:
       return {...state, newCardMessage: action.message}
-    case SET_NEW_CARD_VIDEO:
-      return {...state, newCardVideo: action.video}
-    case CLEAR_NEW_CARD_DATA:
-      return {
-        ...state,
-        newCardTemplateId: {},
-        newCardMessage: '',
-        newCardVideo: {}
-      }
     default:
       return state
   }
