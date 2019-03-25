@@ -10,11 +10,13 @@ class VideoUpload extends Component {
 
   handleUploadImage(evt) {
     evt.preventDefault()
+    // const cardData = new FormData()
+    // cardData.append('cardTemplateId', '1')
+    // cardData.append('message', 'hi')
+    // cardData.append('video', this.state.video)
+    // console.log('Vid: ', this.state.video)
+    // console.log(Array.from(cardData.values()))
     this.props.addVideo(this.uploadInput.files[0])
-  }
-
-  handleChange(evt) {
-    console.log(evt.target.files)
   }
 
   render() {

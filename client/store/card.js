@@ -3,7 +3,7 @@ import axios from 'axios'
 //ACTION TYPES
 
 const GET_ALL_SENT_CARDS = 'GET_ALL_SENT_CARDS'
-const SET_NEW_CARD_TEMPLATE_ID = 'SET_NEW_CARD_TEMPLATE_ID'
+const SET_NEW_CARD_TEMPLATE = 'SET_NEW_CARD_TEMPLATE'
 const SET_NEW_CARD_MESSAGE = 'SET_NEW_CARD_MESSAGE'
 const SET_NEW_CARD_VIDEO = 'SET_NEW_CARD_VIDEO'
 const CLEAR_NEW_CARD_DATA = 'CLEAR_NEW_CARD_DATA'
@@ -13,7 +13,7 @@ const GET_SINGLE_CARD = 'GET_SINGLE_CARD'
 
 const initialState = {
   sentCards: [],
-  newCardTemplateId: 0,
+  newCardTemplate: {},
   newCardMessage: '',
   newCardVideo: {},
   singleCard: {}
@@ -31,9 +31,9 @@ const getSingleCard = card => ({
   card
 })
 
-export const setNewCardTemplateId = id => ({
-  type: SET_NEW_CARD_TEMPLATE_ID,
-  id
+export const setNewCardTemplateId = cardTemplate => ({
+  type: SET_NEW_CARD_TEMPLATE,
+  cardTemplate
 })
 
 export const setNewCardMessage = message => ({
@@ -46,7 +46,7 @@ export const setNewCardVideo = video => ({
   video
 })
 
-export const clearNewCardData = () => ({
+const clearNewCardData = () => ({
   type: CLEAR_NEW_CARD_DATA
 })
 
@@ -63,9 +63,7 @@ export const getAllSentCardsThunk = () => async dispatch => {
 
 export const createNewCardThunk = data => async dispatch => {
   try {
-    const {res} = await axios.post('/api/cards/create', {
-      data
-    })
+    const {res} = await axios.post('/api/cards/create', data)
     dispatch(clearNewCardData())
     dispatch(getSingleCard(res))
   } catch (err) {
@@ -79,8 +77,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_SENT_CARDS:
       return {...state, sentCards: action.cards}
-    case SET_NEW_CARD_TEMPLATE_ID:
-      return {...state, newCardTemplateId: action.id}
+    case SET_NEW_CARD_TEMPLATE:
+      return {...state, newCardTemplate: action.cardTemplate}
     case SET_NEW_CARD_MESSAGE:
       return {...state, newCardMessage: action.message}
     case SET_NEW_CARD_VIDEO:
@@ -88,7 +86,7 @@ export default function(state = initialState, action) {
     case CLEAR_NEW_CARD_DATA:
       return {
         ...state,
-        newCardTemplateId: 0,
+        newCardTemplateId: {},
         newCardMessage: '',
         newCardVideo: {}
       }
