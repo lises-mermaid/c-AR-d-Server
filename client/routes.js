@@ -8,7 +8,7 @@ import {
   UserHome,
   VideoUpload,
   SentCards,
-  CardTemplates
+  CardTemplates,
   CardMessage
 } from './components'
 
