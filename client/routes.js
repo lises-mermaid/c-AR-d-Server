@@ -10,6 +10,7 @@ import {
   SentCards,
   CardMessage
 } from './components'
+
 import {me} from './store'
 
 /**
@@ -27,8 +28,9 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route path="/sign-up" component={SignUp} />
         <Route path="/upload" component={VideoUpload} />
+        <Route path="/confirm" component={ConfirmCard} />
         <Route path="/cards" component={SentCards} />
         <Route path="/message" component={CardMessage} />
         {isLoggedIn && (

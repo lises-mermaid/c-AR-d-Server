@@ -7,18 +7,6 @@ const crypto = require('crypto')
 
 module.exports = router
 
-router.get('/:uuid', async (req, res, next) => {
-  try {
-    const card = await Card.findOne({
-      where: {
-        uuid: req.params.uuid
-      }
-    })
-    res.json(card)
-  } catch (err) {
-    next(err)
-  }
-})
 
 router.get('/cardhistory', async (req, res, next) => {
   try {
@@ -55,7 +43,6 @@ const upload = multer({
       cb(null, {fieldName: file.fieldname})
     },
     key: function(req, file, cb) {
-      // cb(null, file.originalname)
       cb(
         null,
         crypto
@@ -63,7 +50,6 @@ const upload = multer({
           .toString('base64')
           .replace('/', '') + file.originalname
       )
-      console.log(file)
     }
   })
 })
@@ -78,7 +64,7 @@ router.post('/create', function(req, res) {
         .send({errors: [{title: 'Video Upload Error', detail: err.message}]})
     }
     const row = await Card.create({
-      senderId: req.body.senderId,
+      senderId: req.user.id,
       message: req.body.message,
       cardTemplateId: req.body.cardTemplateId,
       video: req.file.location

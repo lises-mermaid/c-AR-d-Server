@@ -46,10 +46,10 @@ export const login = (email, password) => async dispatch => {
   }
 }
 
-export const signup = (email, username, password) => async dispatch => {
+export const signUp = (email, username, password) => async dispatch => {
   let res
   try {
-    res = await axios.post('/auth/signup', {
+    res = await axios.post('/auth/sign-up', {
       email,
       username,
       password
