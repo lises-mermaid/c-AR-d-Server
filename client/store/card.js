@@ -8,6 +8,7 @@ const SET_NEW_CARD_TEMPLATE = 'SET_NEW_CARD_TEMPLATE'
 const SET_NEW_CARD_MESSAGE = 'SET_NEW_CARD_MESSAGE'
 const SET_NEW_CARD_VIDEO = 'SET_NEW_CARD_VIDEO'
 const CLEAR_NEW_CARD_DATA = 'CLEAR_NEW_CARD_DATA'
+const GET_SINGLE_CARD = 'GET_SINGLE_CARD'
 
 //INITIAL STATE
 
@@ -16,7 +17,8 @@ const initialState = {
   cardTemplates: [],
   newCardTemplate: {},
   newCardMessage: '',
-  newCardVideo: {}
+  newCardVideo: {},
+  singleCard: {}
 }
 
 //ACTION CREATORS
@@ -32,6 +34,12 @@ const getAllCardTemplates = cardTemplates => ({
 })
 
 export const setNewCardTemplate = cardTemplate => ({
+const getSingleCard = card => ({
+  type: GET_SINGLE_CARD,
+  card
+})
+
+export const setNewCardTemplateId = cardTemplate => ({
   type: SET_NEW_CARD_TEMPLATE,
   cardTemplate
 })
@@ -46,7 +54,7 @@ export const setNewCardVideo = video => ({
   video
 })
 
-export const clearNewCardData = () => ({
+const clearNewCardData = () => ({
   type: CLEAR_NEW_CARD_DATA
 })
 
@@ -72,8 +80,9 @@ export const getAllCardTemplatesThunk = () => async dispatch => {
 
 export const createNewCardThunk = () => async dispatch => {
   try {
-    const {data} = await axios.post('/api/cards/create')
+    const {res} = await axios.post('/api/cards/create', data)
     dispatch(clearNewCardData())
+    dispatch(getSingleCard(res))
   } catch (err) {
     console.error(err)
   }
@@ -89,6 +98,8 @@ export default function(state = initialState, action) {
       return {...state, cardTemplates: action.cardTemplates}
     case SET_NEW_CARD_TEMPLATE:
       return {...state, newCardTemplate: action.cardTemplate}
+    case SET_NEW_CARD_MESSAGE:
+      return {...state, newCardMessage: action.message}
     default:
       return state
   }
