@@ -3,6 +3,7 @@ import axios from 'axios'
 //ACTION TYPES
 
 const GET_ALL_SENT_CARDS = 'GET_ALL_SENT_CARDS'
+const GET_ALL_CARD_TEMPLATES = 'GET_ALL_CARD_TEMPLATES'
 const SET_NEW_CARD_TEMPLATE = 'SET_NEW_CARD_TEMPLATE'
 const SET_NEW_CARD_MESSAGE = 'SET_NEW_CARD_MESSAGE'
 const SET_NEW_CARD_VIDEO = 'SET_NEW_CARD_VIDEO'
@@ -12,7 +13,8 @@ const CLEAR_NEW_CARD_DATA = 'CLEAR_NEW_CARD_DATA'
 
 const initialState = {
   sentCards: [],
-  newCardTemplate: 0,
+  cardTemplates: [],
+  newCardTemplate: {},
   newCardMessage: '',
   newCardVideo: {}
 }
@@ -24,9 +26,14 @@ const getAllSentCards = cards => ({
   cards
 })
 
-export const setNewCardTemplate = id => ({
+const getAllCardTemplates = cardTemplates => ({
+  type: GET_ALL_CARD_TEMPLATES,
+  cardTemplates
+})
+
+export const setNewCardTemplate = cardTemplate => ({
   type: SET_NEW_CARD_TEMPLATE,
-  id
+  cardTemplate
 })
 
 export const setNewCardMessage = message => ({
@@ -54,6 +61,15 @@ export const getAllSentCardsThunk = () => async dispatch => {
   }
 }
 
+export const getAllCardTemplatesThunk = () => async dispatch => {
+  try {
+    const {data} = await axios.get('/api/cardtemplates')
+    dispatch(getAllCardTemplates(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const createNewCardThunk = () => async dispatch => {
   try {
     const {data} = await axios.post('/api/cards/create')
@@ -69,6 +85,10 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_SENT_CARDS:
       return {...state, sentCards: action.cards}
+    case GET_ALL_CARD_TEMPLATES:
+      return {...state, cardTemplates: action.cardTemplates}
+    case SET_NEW_CARD_TEMPLATE:
+      return {...state, newCardTemplate: action.cardTemplate}
     default:
       return state
   }
