@@ -33,13 +33,12 @@ const getAllCardTemplates = cardTemplates => ({
   cardTemplates
 })
 
-export const setNewCardTemplate = cardTemplate => ({
 const getSingleCard = card => ({
   type: GET_SINGLE_CARD,
   card
 })
 
-export const setNewCardTemplateId = cardTemplate => ({
+export const setNewCardTemplate = cardTemplate => ({
   type: SET_NEW_CARD_TEMPLATE,
   cardTemplate
 })
