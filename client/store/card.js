@@ -54,7 +54,7 @@ const clearNewCardData = () => ({
 
 export const getAllSentCardsThunk = () => async dispatch => {
   try {
-    const {data} = await axios.get('/api/cards')
+    const {data} = await axios.get('/api/cards/cardhistory')
     dispatch(getAllSentCards(data))
   } catch (err) {
     console.error(err)
