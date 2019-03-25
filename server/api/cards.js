@@ -4,18 +4,25 @@ const {generatePic, videoUpload} = require('../utils')
 
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+
+router.get('/cardhistory', async (req, res, next) => {
   try {
     const cards = await Card.findAll({
       where: {
         senderId: req.user.id
-      }
+      },
+      include: [
+        {
+          model: CardTemplate
+        }
+      ]
     })
     res.json(cards)
   } catch (err) {
     next(err)
   }
 })
+
 
 router.post('/create', function(req, res) {
   videoUpload(req, res, async function(err) {
