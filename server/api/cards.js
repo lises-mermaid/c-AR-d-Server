@@ -32,7 +32,6 @@ const upload = multer({
   storage: multerS3({
     s3: s3,
     bucket: 'c-ar-d-videos',
-    folder: 'videos',
     acl: 'public-read',
     metadata: function(req, file, cb) {
       cb(null, {fieldName: file.fieldname})
@@ -59,7 +58,7 @@ router.post('/create', function(req, res) {
         .send({errors: [{title: 'Video Upload Error', detail: err.message}]})
     }
     const row = await Card.create({
-      senderId: req.user,
+      senderId: req.user.id,
       message: req.body.message,
       cardTemplateId: req.body.cardTemplateId,
       video: req.file.location
