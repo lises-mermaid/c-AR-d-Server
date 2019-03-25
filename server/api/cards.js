@@ -7,6 +7,19 @@ const crypto = require('crypto')
 
 module.exports = router
 
+router.get('/:uuid', async (req, res, next) => {
+  try {
+    const card = await Card.findOne({
+      where: {
+        uuid: req.params.uuid
+      }
+    })
+    res.json(card)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/cardhistory', async (req, res, next) => {
   try {
     const cards = await Card.findAll({
