@@ -8,6 +8,7 @@ import {
   UserHome,
   VideoUpload,
   SentCards,
+  CardTemplates,
   CardMessage
 } from './components'
 
@@ -32,6 +33,7 @@ class Routes extends Component {
         <Route path="/upload" component={VideoUpload} />
         <Route path="/confirm" component={ConfirmCard} />
         <Route path="/cards" component={SentCards} />
+        <Route path="/cardtemplates" component={CardTemplates} />
         <Route path="/message" component={CardMessage} />
         {isLoggedIn && (
           <Switch>
