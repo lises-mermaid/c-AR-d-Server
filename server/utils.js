@@ -54,7 +54,8 @@ const generatePic = async (template, qrCodeLink, message, qrPos, msgPos) => {
     text2png(message, {
       color: 'black',
       font: '42px "Comic Sans MS", cursive, sans-serif',
-      lineSpacing: 10
+      lineSpacing: 10,
+      textAlign: 'center'
     })
   )
 
