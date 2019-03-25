@@ -6,6 +6,7 @@
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
 export {default as Login} from './login'
-export {default as Signup} from './sign-up'
+export {default as SignUp} from './sign-up'
 export {default as VideoUpload} from './video-upload'
+export {default as ConfirmCard} from './confirm-card'
 export {default as SentCards} from './sent-cards'

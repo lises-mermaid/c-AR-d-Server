@@ -1,14 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {signup} from '../store'
+import {signUp} from '../store'
 
-const Signup = props => {
+const SignUp = props => {
   const {handleSubmit, error} = props
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name="Signup">
+      <form onSubmit={handleSubmit} name="SignUp">
         <div>
           <label htmlFor="email">
             <small>Email</small>
@@ -48,12 +48,12 @@ const mapDispatchToProps = dispatch => {
       const email = evt.target.email.value
       const username = evt.target.username.value
       const password = evt.target.password.value
-      dispatch(signup(email, username, password))
+      dispatch(signUp(email, username, password))
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup)
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
 
 /**
  * PROP TYPES

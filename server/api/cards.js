@@ -43,7 +43,6 @@ const upload = multer({
       cb(null, {fieldName: file.fieldname})
     },
     key: function(req, file, cb) {
-      // cb(null, file.originalname)
       cb(
         null,
         crypto
@@ -51,7 +50,6 @@ const upload = multer({
           .toString('base64')
           .replace('/', '') + file.originalname
       )
-      console.log(file)
     }
   })
 })
@@ -66,7 +64,7 @@ router.post('/create', function(req, res) {
         .send({errors: [{title: 'Video Upload Error', detail: err.message}]})
     }
     const row = await Card.create({
-      senderId: req.body.senderId,
+      senderId: req.user.id,
       message: req.body.message,
       cardTemplateId: req.body.cardTemplateId,
       video: req.file.location

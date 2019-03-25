@@ -1,21 +1,16 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {setNewCardVideo} from '../store'
 
-class VideoUploader extends Component {
+class VideoUpload extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      uploadStatus: false
-    }
     this.handleUploadImage = this.handleUploadImage.bind(this)
   }
 
   handleUploadImage(evt) {
     evt.preventDefault()
-    const data = new FormData()
-    data.append('file', this.uploadInput.files[0])
-    data.append('filename', this.fileName.value)
+    this.props.addVideo(this.uploadInput.files[0])
   }
 
   render() {
@@ -32,17 +27,6 @@ class VideoUploader extends Component {
             />
           </div>
           <br />
-          <div className="form-group">
-            <input
-              className="form-control"
-              ref={ref => {
-                this.fileName = ref
-              }}
-              type="text"
-              placeholder="Optional name for the file"
-            />
-          </div>
-          <br />
           <div>
             <button type="submit">Upload</button>
           </div>
@@ -52,8 +36,8 @@ class VideoUploader extends Component {
   }
 }
 
-export default connect(null, null)(VideoUploader)
+const mapDispatchToProps = dispatch => ({
+  addVideo: video => dispatch(setNewCardVideo(video))
+})
 
-VideoUploader.propTypes = {
-  uploadStatus: PropTypes.bool.isRequired
-}
+export default connect(null, mapDispatchToProps)(VideoUpload)

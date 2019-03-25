@@ -7,14 +7,16 @@ const SET_NEW_CARD_TEMPLATE = 'SET_NEW_CARD_TEMPLATE'
 const SET_NEW_CARD_MESSAGE = 'SET_NEW_CARD_MESSAGE'
 const SET_NEW_CARD_VIDEO = 'SET_NEW_CARD_VIDEO'
 const CLEAR_NEW_CARD_DATA = 'CLEAR_NEW_CARD_DATA'
+const GET_SINGLE_CARD = 'GET_SINGLE_CARD'
 
 //INITIAL STATE
 
 const initialState = {
   sentCards: [],
-  newCardTemplate: 0,
+  newCardTemplate: {},
   newCardMessage: '',
-  newCardVideo: {}
+  newCardVideo: {},
+  singleCard: {}
 }
 
 //ACTION CREATORS
@@ -24,9 +26,14 @@ const getAllSentCards = cards => ({
   cards
 })
 
-export const setNewCardTemplate = id => ({
+const getSingleCard = card => ({
+  type: GET_SINGLE_CARD,
+  card
+})
+
+export const setNewCardTemplateId = cardTemplate => ({
   type: SET_NEW_CARD_TEMPLATE,
-  id
+  cardTemplate
 })
 
 export const setNewCardMessage = message => ({
@@ -39,7 +46,7 @@ export const setNewCardVideo = video => ({
   video
 })
 
-export const clearNewCardData = () => ({
+const clearNewCardData = () => ({
   type: CLEAR_NEW_CARD_DATA
 })
 
@@ -54,10 +61,11 @@ export const getAllSentCardsThunk = () => async dispatch => {
   }
 }
 
-export const createNewCardThunk = () => async dispatch => {
+export const createNewCardThunk = data => async dispatch => {
   try {
-    const {data} = await axios.post('/api/cards/create')
+    const {res} = await axios.post('/api/cards/create', data)
     dispatch(clearNewCardData())
+    dispatch(getSingleCard(res))
   } catch (err) {
     console.error(err)
   }
@@ -69,6 +77,19 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_SENT_CARDS:
       return {...state, sentCards: action.cards}
+    case SET_NEW_CARD_TEMPLATE:
+      return {...state, newCardTemplate: action.cardTemplate}
+    case SET_NEW_CARD_MESSAGE:
+      return {...state, newCardMessage: action.message}
+    case SET_NEW_CARD_VIDEO:
+      return {...state, newCardVideo: action.video}
+    case CLEAR_NEW_CARD_DATA:
+      return {
+        ...state,
+        newCardTemplateId: {},
+        newCardMessage: '',
+        newCardVideo: {}
+      }
     default:
       return state
   }
