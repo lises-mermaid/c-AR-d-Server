@@ -13,7 +13,7 @@ class cardTemplates extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <h2>Select A Card</h2>
         <div>
           {this.props.cardTemplates.map(cardTemplate => (
@@ -26,7 +26,7 @@ class cardTemplates extends Component {
             </div>
           ))}
         </div>
-      </div>
+       </React.Fragment>
     )
   }
 }
