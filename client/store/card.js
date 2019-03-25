@@ -5,6 +5,7 @@ import axios from 'axios'
 const GET_ALL_SENT_CARDS = 'GET_ALL_SENT_CARDS'
 const SET_NEW_CARD_TEMPLATE_ID = 'SET_NEW_CARD_TEMPLATE_ID'
 const SET_NEW_CARD_MESSAGE = 'SET_NEW_CARD_MESSAGE'
+const SET_NEW_CARD_VIDEO = 'SET_NEW_CARD_VIDEO'
 const CLEAR_NEW_CARD_DATA = 'CLEAR_NEW_CARD_DATA'
 const GET_SINGLE_CARD = 'GET_SINGLE_CARD'
 
@@ -14,6 +15,7 @@ const initialState = {
   sentCards: [],
   newCardTemplateId: 0,
   newCardMessage: '',
+  newCardVideo: {},
   singleCard: {}
 }
 
@@ -39,6 +41,11 @@ export const setNewCardMessage = message => ({
   message
 })
 
+export const setNewCardVideo = video => ({
+  type: SET_NEW_CARD_VIDEO,
+  video
+})
+
 export const clearNewCardData = () => ({
   type: CLEAR_NEW_CARD_DATA
 })
@@ -54,19 +61,13 @@ export const getAllSentCardsThunk = () => async dispatch => {
   }
 }
 
-export const createNewCardThunk = (
-  cardTemplateId,
-  message,
-  video
-) => async dispatch => {
+export const createNewCardThunk = data => async dispatch => {
   try {
-    const {data} = await axios.post('/api/cards/create', {
-      cardTemplateId,
-      message,
-      video
+    const {res} = await axios.post('/api/cards/create', {
+      data
     })
     dispatch(clearNewCardData())
-    dispatch(getSingleCard(data))
+    dispatch(getSingleCard(res))
   } catch (err) {
     console.error(err)
   }
@@ -79,11 +80,18 @@ export default function(state = initialState, action) {
     case GET_ALL_SENT_CARDS:
       return {...state, sentCards: action.cards}
     case SET_NEW_CARD_TEMPLATE_ID:
-      return {...state, newCardTemplateId: action.newCardTemplateId}
+      return {...state, newCardTemplateId: action.id}
     case SET_NEW_CARD_MESSAGE:
-      return {...state, newCardMessage: action.newCardMessage}
+      return {...state, newCardMessage: action.message}
+    case SET_NEW_CARD_VIDEO:
+      return {...state, newCardVideo: action.video}
     case CLEAR_NEW_CARD_DATA:
-      return {...state, newCardTemplateId: 0, newCardMessage: ''}
+      return {
+        ...state,
+        newCardTemplateId: 0,
+        newCardMessage: '',
+        newCardVideo: {}
+      }
     default:
       return state
   }

@@ -6,5 +6,5 @@
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
 export {default as Login} from './login'
-export {default as Signup} from './signup'
-export {default as VideoUpload} from './videoupload'
+export {default as SignUp} from './sign-up'
+export {default as VideoUpload} from './video-upload'
