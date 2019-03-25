@@ -69,6 +69,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_SENT_CARDS:
       return {...state, sentCards: action.cards}
+    case SET_NEW_CARD_MESSAGE:
+      return {...state, newCardMessage: action.message}
     default:
       return state
   }
