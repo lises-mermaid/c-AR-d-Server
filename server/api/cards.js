@@ -29,7 +29,7 @@ router.post('/create', function(req, res) {
         .status(422)
         .send({errors: [{title: 'Video Upload Error', detail: err.message}]})
     }
-    const card = await Card.create({
+    let card = await Card.create({
       senderId: req.body.senderId,
       message: req.body.message,
       cardTemplateId: req.body.cardTemplateId,
@@ -53,10 +53,12 @@ router.post('/create', function(req, res) {
       {x: cardTemplate.qrX, y: cardTemplate.qrY}, // qr postion
       {x: cardTemplate.msgX, y: cardTemplate.msgY} // message position
     )
-    // upload the card to s3
+    // upload the card to s3 and stoore the link in database
     await cardUpload(card.uuid)
-
-    return res.json({uri: card.video})
+    card = await card.update({
+      link: `https://s3.amazonaws.com/c-ar-d-videos/cards/card-${card.uuid}.png`
+    })
+    return res.json({uri: card.link})
   })
 })
 
