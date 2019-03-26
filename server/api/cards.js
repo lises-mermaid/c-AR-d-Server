@@ -47,6 +47,7 @@ router.post('/create', function(req, res) {
     })
     // generate QRCode and Text images
     await generatePic(
+      card.uuid,
       cardTemplate.picture,
       qrCodeLink,
       card.message,

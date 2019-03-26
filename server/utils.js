@@ -38,11 +38,18 @@ const uploadVideo = multer({
 const videoUpload = uploadVideo.single('video')
 
 // generate card locally
-const generatePic = async (template, qrCodeLink, message, qrPos, msgPos) => {
+const generatePic = async (
+  uuid,
+  template,
+  qrCodeLink,
+  message,
+  qrPos,
+  msgPos
+) => {
   // QR Code
   async function createQRFile() {
     return new Promise(resolve => {
-      const writeToFile = fs.createWriteStream('temp/QRCode.png')
+      const writeToFile = fs.createWriteStream(`temp/QRCode-${uuid}.png`)
       qrImage.image(qrCodeLink, {type: 'png', size: 4}).pipe(writeToFile)
       writeToFile.on('finish', resolve)
     })
@@ -50,7 +57,7 @@ const generatePic = async (template, qrCodeLink, message, qrPos, msgPos) => {
   await createQRFile()
   // Message
   fs.writeFileSync(
-    'temp/message.png',
+    `temp/message-${uuid}.png`,
     text2png(message, {
       color: 'black',
       font: '42px "Comic Sans MS", cursive, sans-serif',
@@ -59,16 +66,20 @@ const generatePic = async (template, qrCodeLink, message, qrPos, msgPos) => {
     })
   )
   // Generate final card
-  const images = [template, 'temp/QRCode.png', 'temp/message.png']
+  const images = [
+    template,
+    `temp/QRCode-${uuid}.png`,
+    `temp/message-${uuid}.png`
+  ]
   let jimps = []
 
   for (let i = 0; i < images.length; i++) {
     jimps.push(jimp.read(images[i]))
   }
-  Promise.all(jimps).then(function(data) {
+  await Promise.all(jimps).then(function(data) {
     data[0].composite(data[1], qrPos.x, qrPos.y)
     data[0].composite(data[2], msgPos.x, msgPos.y)
-    data[0].write('temp/card.png', function() {
+    data[0].write(`temp/card-${uuid}.png`, function() {
       console.log('card created')
     })
   })
@@ -76,7 +87,7 @@ const generatePic = async (template, qrCodeLink, message, qrPos, msgPos) => {
 
 // upload finished card
 const cardUpload = async uuid => {
-  fs.readFile('temp/card.png', function(err, data) {
+  await fs.readFile(`temp/card-${uuid}.png`, function(err, data) {
     if (err) {
       throw err
     }
