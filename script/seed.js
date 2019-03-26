@@ -203,46 +203,15 @@ async function seed() {
 
   const cards = await Promise.all([
     Card.create({
+      uuid: 'd386f874-b032-4849-943c-8bd8728bfcb0',
       senderId: 1,
       receiverId: 2,
       cardTemplateId: 1,
-      qrCode: 'placeholder',
-      video: 'example.com'
-    }),
-    Card.create({
-      senderId: 2,
-      receiverId: 3,
-      cardTemplateId: 2,
-      qrCode: 'placeholder',
-      video: 'example.com'
-    }),
-    Card.create({
-      senderId: 3,
-      receiverId: 4,
-      cardTemplateId: 3,
-      qrCode: 'placeholder',
-      video: 'example.com'
-    }),
-    Card.create({
-      senderId: 4,
-      receiverId: 5,
-      cardTemplateId: 4,
-      qrCode: 'placeholder',
-      video: 'example.com'
-    }),
-    Card.create({
-      senderId: 5,
-      receiverId: 6,
-      cardTemplateId: 5,
-      qrCode: 'placeholder',
-      video: 'example.com'
-    }),
-    Card.create({
-      senderId: 6,
-      receiverId: 1,
-      cardTemplateId: 6,
-      qrCode: 'placeholder',
-      video: 'example.com'
+      qrCode: `https://c-ar-d-server.herokuapp.com/api/cards/scan/d386f874-b032-4849-943c-8bd8728bfcb0`,
+      video: 'https://s3.amazonaws.com/c-ar-d-videos/videos/do_not_delete.mp4',
+      link:
+        'https://s3.amazonaws.com/c-ar-d-videos/cards/card-d386f874-b032-4849-943c-8bd8728bfcb0.png',
+      message: 'Hello world'
     })
   ])
 
