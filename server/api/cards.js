@@ -40,7 +40,7 @@ router.post('/create', function(req, res) {
     const qrCodeLink = `https://c-ar-d-server.herokuapp.com/api/cards/scan/${
       card.uuid
     }`
-    card.update({qrCodeLink})
+    card.update({qrCode: qrCodeLink})
 
     // find cardTemplate link
     const cardTemplate = await CardTemplate.findOne({
