@@ -10,9 +10,7 @@ class cardMessage extends Component {
 
   writeMessage(evt) {
     evt.preventDefault()
-    evt.target.message.value === 'Your Message (optional)'
-      ? this.props.createMessage('')
-      : this.props.createMessage(evt.target.message.value)
+    this.props.createMessage(evt.target.message.value)
   }
 
   render() {
@@ -21,9 +19,13 @@ class cardMessage extends Component {
         <h2>Write Your Message</h2>
         <div>
           <form onSubmit={this.writeMessage}>
-            <textarea name="message" rows="5" cols="50" maxLength="160">
-              Your Message (optional)
-            </textarea>
+            <textarea
+              name="message"
+              rows="5"
+              cols="50"
+              maxLength="160"
+              placeholder="Your Message (optional)"
+            />
             <br />
             <button type="submit">Submit</button>
           </form>
