@@ -4,7 +4,6 @@ const {generatePic, videoUpload} = require('../utils')
 
 module.exports = router
 
-
 router.get('/cardhistory', async (req, res, next) => {
   try {
     const cards = await Card.findAll({
@@ -23,7 +22,6 @@ router.get('/cardhistory', async (req, res, next) => {
   }
 })
 
-
 router.post('/create', function(req, res) {
   videoUpload(req, res, async function(err) {
     if (err) {
@@ -38,7 +36,9 @@ router.post('/create', function(req, res) {
       video: req.file.location
     })
     // generate qrCode string
-    const qrCodeLink = `http://localhost:8080/api/cards/scan/${card.uuid}`
+    const qrCodeLink = `https://c-ar-d-server.herokuapp.com/api/cards/scan/${
+      card.uuid
+    }`
     card.update({qrCodeLink})
 
     // find cardTemplate link
