@@ -77,7 +77,7 @@ export const getAllCardTemplatesThunk = () => async dispatch => {
   }
 }
 
-export const createNewCardThunk = () => async dispatch => {
+export const createNewCardThunk = data => async dispatch => {
   try {
     const {res} = await axios.post('/api/cards/create', data)
     dispatch(clearNewCardData())
