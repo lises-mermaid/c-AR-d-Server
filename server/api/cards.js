@@ -54,7 +54,7 @@ router.post('/create', function(req, res) {
       {x: cardTemplate.qrX, y: cardTemplate.qrY}, // qr postion
       {x: cardTemplate.msgX, y: cardTemplate.msgY} // message position
     )
-    // upload the card to s3 and stoore the link in database
+    // upload the card to s3 and store the link in database
     await cardUpload(card.uuid)
     card = await card.update({
       link: `https://s3.amazonaws.com/c-ar-d-videos/cards/card-${card.uuid}.png`
