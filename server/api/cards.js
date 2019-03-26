@@ -30,7 +30,7 @@ router.post('/create', function(req, res) {
         .send({errors: [{title: 'Video Upload Error', detail: err.message}]})
     }
     const card = await Card.create({
-      senderId: req.body.senderId,
+      senderId: req.user.id,
       message: req.body.message,
       cardTemplateId: req.body.cardTemplateId,
       video: req.file.location
