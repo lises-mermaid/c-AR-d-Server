@@ -52,7 +52,9 @@ class ConfirmCard extends Component {
         <label>Video</label>
         <br />
         <div>
-          <button type="submit">Create Card</button>
+          <button type="submit" onClick={this.handleSubmit}>
+            Create Card
+          </button>
         </div>
       </div>
     )

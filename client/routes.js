@@ -4,12 +4,13 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Login,
-  Signup,
+  SignUp,
   UserHome,
   VideoUpload,
   SentCards,
   CardTemplates,
-  CardMessage
+  CardMessage,
+  ConfirmCard
 } from './components'
 
 import {me} from './store'
@@ -32,13 +33,14 @@ class Routes extends Component {
         <Route path="/sign-up" component={SignUp} />
         <Route path="/upload" component={VideoUpload} />
         <Route path="/confirm" component={ConfirmCard} />
-        <Route path="/cards" component={SentCards} />
         <Route path="/cardtemplates" component={CardTemplates} />
         <Route path="/message" component={CardMessage} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route path="/cards" component={SentCards} />
+            <Route path="/confirm" component={ConfirmCard} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
