@@ -1,9 +1,8 @@
 const router = require('express').Router()
 const {Card, CardTemplate} = require('../db/models')
-const {generatePic, videoUpload} = require('../utils')
+const {generatePic, videoUpload, cardUpload} = require('../utils')
 
 module.exports = router
-
 
 router.get('/cardhistory', async (req, res, next) => {
   try {
@@ -22,7 +21,6 @@ router.get('/cardhistory', async (req, res, next) => {
     next(err)
   }
 })
-
 
 router.post('/create', function(req, res) {
   videoUpload(req, res, async function(err) {
@@ -55,6 +53,8 @@ router.post('/create', function(req, res) {
       {x: cardTemplate.qrX, y: cardTemplate.qrY}, // qr postion
       {x: cardTemplate.msgX, y: cardTemplate.msgY} // message position
     )
+    // upload the card to s3
+    await cardUpload(card.uuid)
 
     return res.json({uri: card.video})
   })
