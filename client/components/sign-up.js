@@ -58,7 +58,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
 /**
  * PROP TYPES
  */
-Signup.propTypes = {
+SignUp.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object
 }
