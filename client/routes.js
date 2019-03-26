@@ -31,15 +31,14 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/sign-up" component={SignUp} />
-        <Route path="/upload" component={VideoUpload} />
-        <Route path="/confirm" component={ConfirmCard} />
         <Route path="/cardtemplates" component={CardTemplates} />
-        <Route path="/message" component={CardMessage} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             <Route path="/cards" component={SentCards} />
+            <Route path="/message" component={CardMessage} />
+            <Route path="/upload" component={VideoUpload} />
             <Route path="/confirm" component={ConfirmCard} />
           </Switch>
         )}
