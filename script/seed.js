@@ -203,11 +203,11 @@ async function seed() {
 
   const cards = await Promise.all([
     Card.create({
-      uuid: '1fae6dd4-978f-4566-89d6-8e046ae6c536',
+      uuid: 'd8b2cb2d-bfa9-4262-beea-63e70367b70b',
       senderId: 1,
       receiverId: 2,
       cardTemplateId: 3,
-      qrCode: `https://c-ar-d-server.herokuapp.com/api/cards/scan/1fae6dd4-978f-4566-89d6-8e046ae6c536`,
+      qrCode: `https://c-ar-d-server.herokuapp.com/api/cards/scan/d8b2cb2d-bfa9-4262-beea-63e70367b70b`,
       video: 'https://s3.amazonaws.com/c-ar-d-videos/videos/do_not_delete.mp4',
       link:
         'https://s3.amazonaws.com/c-ar-d-videos/cards/do_not_delete_card.png',
