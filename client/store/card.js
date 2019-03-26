@@ -99,6 +99,8 @@ export default function(state = initialState, action) {
       return {...state, newCardTemplate: action.cardTemplate}
     case SET_NEW_CARD_MESSAGE:
       return {...state, newCardMessage: action.message}
+    case SET_NEW_CARD_VIDEO:
+      return {...state, newCardVideo: action.video}
     default:
       return state
   }
