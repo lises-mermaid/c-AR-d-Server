@@ -9,7 +9,8 @@ import {
   VideoUpload,
   SentCards,
   CardTemplates,
-  CardMessage
+  CardMessage,
+  ConfirmCard
 } from './components'
 
 import {me} from './store'
