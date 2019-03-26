@@ -21,6 +21,9 @@ const Card = db.define('card', {
   message: {
     type: Sequelize.TEXT,
     allowNull: true
+  },
+  link: {
+    type: Sequelize.STRING
   }
 })
 
