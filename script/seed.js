@@ -206,11 +206,11 @@ async function seed() {
       uuid: '1fae6dd4-978f-4566-89d6-8e046ae6c536',
       senderId: 1,
       receiverId: 2,
-      cardTemplateId: 1,
+      cardTemplateId: 3,
       qrCode: `https://c-ar-d-server.herokuapp.com/api/cards/scan/1fae6dd4-978f-4566-89d6-8e046ae6c536`,
       video: 'https://s3.amazonaws.com/c-ar-d-videos/videos/do_not_delete.mp4',
       link:
-        'https://s3.amazonaws.com/c-ar-d-videos/cards/card-1fae6dd4-978f-4566-89d6-8e046ae6c536.png',
+        'https://s3.amazonaws.com/c-ar-d-videos/cards/do_not_delete_card.png',
       message: 'Hello'
     })
   ])
