@@ -46,10 +46,16 @@ const generatePic = async (
   qrPos,
   msgPos
 ) => {
+  const images = [
+    template,
+    `temp/QRCode-${uuid}.png`,
+    `temp/message-${uuid}.png`
+  ]
+  let jimps = []
   // QR Code
   async function createQRFile() {
     return new Promise(resolve => {
-      const writeToFile = fs.createWriteStream(`temp/QRCode-${uuid}.png`)
+      const writeToFile = fs.createWriteStream(images[1])
       qrImage.image(qrCodeLink, {type: 'png', size: 4}).pipe(writeToFile)
       writeToFile.on('finish', resolve)
     })
@@ -57,7 +63,7 @@ const generatePic = async (
   await createQRFile()
   // Message
   fs.writeFileSync(
-    `temp/message-${uuid}.png`,
+    images[2],
     text2png(message, {
       color: 'black',
       font: '42px "Comic Sans MS", cursive, sans-serif',
@@ -66,12 +72,6 @@ const generatePic = async (
     })
   )
   // Generate final card
-  const images = [
-    template,
-    `temp/QRCode-${uuid}.png`,
-    `temp/message-${uuid}.png`
-  ]
-  let jimps = []
 
   for (let i = 0; i < images.length; i++) {
     jimps.push(jimp.read(images[i]))
@@ -81,6 +81,14 @@ const generatePic = async (
     data[0].composite(data[2], msgPos.x, msgPos.y)
     data[0].write(`temp/card-${uuid}.png`, function() {
       console.log('card created')
+      fs.unlink(images[1], err => {
+        if (err) throw err
+        console.log('successfully deleted temporary QR code image')
+      })
+      fs.unlink(images[2], err => {
+        if (err) throw err
+        console.log('successfully deleted temporary text image')
+      })
     })
   })
 }
@@ -102,6 +110,10 @@ const cardUpload = async uuid => {
         console.log(err)
       } else {
         console.log('Successfully uploaded card to S3')
+        fs.unlink(`temp/card-${uuid}.png`, err => {
+          if (err) throw err
+          console.log('successfully deleted temporary card image')
+        })
       }
     })
   })
