@@ -29,14 +29,17 @@ router.post('/create', function(req, res) {
         .status(422)
         .send({errors: [{title: 'Video Upload Error', detail: err.message}]})
     }
+
     let card = await Card.create({
-      senderId: req.body.senderId,
+      senderId: req.user.id,
       message: req.body.message,
       cardTemplateId: req.body.cardTemplateId,
       video: req.file.location
     })
     // generate qrCode string
-    const qrCodeLink = `http://localhost:8080/api/cards/scan/${card.uuid}`
+    const qrCodeLink = `https://c-ar-d-server.herokuapp.com/api/cards/scan/${
+      card.uuid
+    }`
     card.update({qrCodeLink})
 
     // find cardTemplate link
