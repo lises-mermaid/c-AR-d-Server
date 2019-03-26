@@ -14,7 +14,8 @@ AWS.config.update({
   region: 'us-east-1'
 })
 const s3 = new AWS.S3()
-const upload = multer({
+// upload video
+const uploadVideo = multer({
   storage: multerS3({
     s3: s3,
     bucket: 'c-ar-d-videos',
@@ -34,23 +35,35 @@ const upload = multer({
     }
   })
 })
-const videoUpload = upload.single('video')
+const videoUpload = uploadVideo.single('video')
 
-const generatePic = async (template, qrCodeLink, message, qrPos, msgPos) => {
-  console.log(template)
+// generate card locally
+const generatePic = async (
+  uuid,
+  template,
+  qrCodeLink,
+  message,
+  qrPos,
+  msgPos
+) => {
+  const images = [
+    template,
+    `temp/QRCode-${uuid}.png`,
+    `temp/message-${uuid}.png`
+  ]
+  let jimps = []
   // QR Code
   async function createQRFile() {
     return new Promise(resolve => {
-      const writeToFile = fs.createWriteStream('temp/QRCode.png')
+      const writeToFile = fs.createWriteStream(images[1])
       qrImage.image(qrCodeLink, {type: 'png', size: 4}).pipe(writeToFile)
       writeToFile.on('finish', resolve)
     })
   }
   await createQRFile()
-
   // Message
   fs.writeFileSync(
-    'temp/message.png',
+    images[2],
     text2png(message, {
       color: 'black',
       font: '42px "Comic Sans MS", cursive, sans-serif',
@@ -58,24 +71,55 @@ const generatePic = async (template, qrCodeLink, message, qrPos, msgPos) => {
       textAlign: 'center'
     })
   )
-
   // Generate final card
-  const images = [template, 'temp/QRCode.png', 'temp/message.png']
-  let jimps = []
 
   for (let i = 0; i < images.length; i++) {
     jimps.push(jimp.read(images[i]))
   }
-  Promise.all(jimps).then(function(data) {
+  await Promise.all(jimps).then(function(data) {
     data[0].composite(data[1], qrPos.x, qrPos.y)
     data[0].composite(data[2], msgPos.x, msgPos.y)
-    data[0].write('temp/card.png', function() {
+    data[0].write(`temp/card-${uuid}.png`, function() {
       console.log('card created')
+      fs.unlink(images[1], err => {
+        if (err) throw err
+        console.log('successfully deleted temporary QR code image')
+      })
+      fs.unlink(images[2], err => {
+        if (err) throw err
+        console.log('successfully deleted temporary text image')
+      })
     })
   })
 }
 
+// upload finished card
+const cardUpload = async uuid => {
+  await fs.readFile(`temp/card-${uuid}.png`, function(err, data) {
+    if (err) {
+      throw err
+    }
+    params = {
+      Bucket: 'c-ar-d-videos',
+      Key: `cards/card-${uuid}.png`,
+      ACL: 'public-read',
+      Body: data
+    }
+    s3.putObject(params, function(err, data) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log('Successfully uploaded card to S3')
+        fs.unlink(`temp/card-${uuid}.png`, err => {
+          if (err) throw err
+          console.log('successfully deleted temporary card image')
+        })
+      }
+    })
+  })
+}
 module.exports = {
   generatePic,
-  videoUpload
+  videoUpload,
+  cardUpload
 }
