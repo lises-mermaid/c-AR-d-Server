@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {createNewCardThunk} from '../store'
+import Button from 'react-bootstrap/Button'
 
 class ConfirmCard extends Component {
   constructor(props) {
@@ -52,9 +53,14 @@ class ConfirmCard extends Component {
         <label>Video</label>
         <br />
         <div>
-          <button type="submit" onClick={this.handleSubmit}>
+          <Button
+            variant="flat"
+            size="xxl"
+            type="submit"
+            onClick={this.handleSubmit}
+          >
             Create Card
-          </button>
+          </Button>
         </div>
       </div>
     )
