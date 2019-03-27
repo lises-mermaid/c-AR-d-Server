@@ -17,7 +17,6 @@ class CreateCard extends Component {
   }
 
   componentDidMount() {
-    console.log('State: ', this.state)
     this.props.getAllCardTemplates()
   }
 

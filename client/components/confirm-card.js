@@ -1,43 +1,50 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 
-const ConfirmCard = props => (
-  <div>
-    <h3>Review Card</h3>
-    <h5>{props.cardTemplate.occasion}</h5>
-    <img src={props.cardTemplate.picture} width="120" />
-    <label>Message</label>
-    <div>{props.message}</div>
-    <label>Video</label>
-    <br />
-    <div>
+class ConfirmCard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {isLoading: false}
+  }
+  render() {
+    return (
       <div>
+        <h3>Review Card</h3>
+        <h5>{this.props.cardTemplate.occasion}</h5>
+        <img src={this.props.cardTemplate.picture} width="120" />
+        <label>Message</label>
+        <div>{this.props.message}</div>
+        <label>Video</label>
+        <br />
         <div>
-          {this.state.isLoading ? (
+          <div>
             <div>
-              <Spinner animation="border" variant="primary">
-                <span className="sr-only">Loading...</span>
-              </Spinner>
-              <p> Your Card is being created!</p>
+              {this.state.isLoading ? (
+                <div>
+                  <Spinner animation="border" variant="primary">
+                    <span className="sr-only">Loading...</span>
+                  </Spinner>
+                  <p> Your Card is being created!</p>
+                </div>
+              ) : (
+                <Button
+                  variant="flat"
+                  type="submit"
+                  onClick={evt => {
+                    evt.preventDefault()
+                    this.props.submitCard()
+                    this.setState({isLoading: true})
+                  }}
+                >
+                  Create Card
+                </Button>
+              )}
             </div>
-          ) : (
-            <Button
-              variant="flat"
-              type="submit"
-              onClick={evt => {
-                evt.preventDefault()
-                this.props.submitCard()
-                this.setState({isLoading: true})
-              }}
-            >
-              Create Card
-            </Button>
-          )}
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-)
-
+    )
+  }
+}
 export default ConfirmCard

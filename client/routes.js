@@ -8,7 +8,8 @@ import {
   UserHome,
   SentCards,
   CardTemplates,
-  CreateCard
+  CreateCard,
+  SingleCard
 } from './components'
 
 import {me} from './store'
@@ -25,22 +26,25 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
-      <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/sign-up" component={SignUp} />
-        <Route path="/cardtemplates" component={CardTemplates} />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-            <Route path="/cards" component={SentCards} />
-            <Route path="/create" component={CreateCard} />
-          </Switch>
-        )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
-      </Switch>
+      <div className="component-container">
+        <Switch>
+          {/* Routes placed here are available to all visitors */}
+          <Route path="/login" component={Login} />
+          <Route path="/sign-up" component={SignUp} />
+          <Route path="/cardtemplates" component={CardTemplates} />
+          {isLoggedIn && (
+            <Switch>
+              {/* Routes placed here are only available after logging in */}
+              <Route path="/home" component={UserHome} />
+              <Route exact path="/cards" component={SentCards} />
+              <Route path="/cards/:uuid" component={SingleCard} />
+              <Route path="/create" component={CreateCard} />
+            </Switch>
+          )}
+          {/* Displays our Login component as a fallback */}
+          <Route component={Login} />
+        </Switch>
+      </div>
     )
   }
 }
