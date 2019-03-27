@@ -25,3 +25,7 @@ form div {
   background-color: #45d9e6;
   color: #ffffff;
 }
+
+.component-container {
+  margin: 2em;
+}

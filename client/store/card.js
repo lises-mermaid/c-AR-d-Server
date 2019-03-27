@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../history'
 
 //ACTION TYPES
 
@@ -42,6 +43,15 @@ export const getAllSentCardsThunk = () => async dispatch => {
   }
 }
 
+export const getSingleCardThunk = uuid => async dispatch => {
+  try {
+    const {data} = await axios.get(`/api/cards/scan/${uuid}`)
+    dispatch(getSingleCard(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const getAllCardTemplatesThunk = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/cardtemplates')
@@ -52,11 +62,16 @@ export const getAllCardTemplatesThunk = () => async dispatch => {
 }
 
 export const createNewCardThunk = cardData => async dispatch => {
+  let res
   try {
-    const {data} = await axios.post('/api/cards/create', cardData)
-    dispatch(getSingleCard(data))
+    res = await axios.post('/api/cards/create', cardData)
   } catch (err) {
-    console.error(err)
+    return console.error(err)
+  }
+  try {
+    history.push(`/cards/${res.data.uuid}`)
+  } catch (dispatchOrHistoryErr) {
+    console.error(dispatchOrHistoryErr)
   }
 }
 

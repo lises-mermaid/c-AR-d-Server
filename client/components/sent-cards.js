@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getAllSentCardsThunk} from '../store'
+import {Link} from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 class SentCards extends Component {
   componentDidMount() {
@@ -16,8 +18,13 @@ class SentCards extends Component {
             <div key={card.uuid}>
               <img src={card.cardTemplate.picture} height="140" width="120" />
               {card.message ? <p>message: "{card.message}"</p> : <br />}
-              <p>video: {card.video}</p>
+              <p>
+                <a href={card.video}>video</a>
+              </p>
               <p>{card.createdAt.slice(0, 10)}</p>
+              <Link to={`/cards/${card.uuid}`}>
+                <Button>Print Your Card</Button>
+              </Link>
             </div>
           ))}
         </div>
