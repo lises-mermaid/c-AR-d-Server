@@ -13,9 +13,15 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  color: #222222;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.btn-flat {
+  background-color: #45d9e6;
+  color: #ffffff;
 }
