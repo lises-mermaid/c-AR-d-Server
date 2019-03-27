@@ -10,7 +10,8 @@ import {
   SentCards,
   CardTemplates,
   CardMessage,
-  ConfirmCard
+  ConfirmCard,
+  CreateCard
 } from './components'
 
 import {me} from './store'
@@ -37,9 +38,7 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             <Route path="/cards" component={SentCards} />
-            <Route path="/message" component={CardMessage} />
-            <Route path="/upload" component={VideoUpload} />
-            <Route path="/confirm" component={ConfirmCard} />
+            <Route path="/create" component={CreateCard} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

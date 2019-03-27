@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {setNewCardMessage} from '../store'
+import Button from 'react-bootstrap/Button'
 
 class cardMessage extends Component {
   constructor(props) {
@@ -21,13 +22,15 @@ class cardMessage extends Component {
           <form onSubmit={this.writeMessage}>
             <textarea
               name="message"
-              rows="5"
-              cols="50"
+              rows="4"
+              cols="40"
               maxLength="160"
               placeholder="Your Message (optional)"
             />
             <br />
-            <button type="submit">Submit</button>
+            <Button type="submit" variant="flat">
+              Submit
+            </Button>
           </form>
         </div>
       </div>

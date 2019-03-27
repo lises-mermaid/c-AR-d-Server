@@ -25,6 +25,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               Logout
             </a>
             <Link to="/cards">Card History</Link>
+            <Link to="/create">Create A Card</Link>
             {/* <Link to="/message">Message</Link>
           <Link to="/upload">Upload</Link>
           <Link to="/confirm">Confirm</Link> */}

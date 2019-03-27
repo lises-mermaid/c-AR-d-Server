@@ -13,6 +13,7 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  color: #222222;
 }
 
 form div {
@@ -21,10 +22,6 @@ form div {
 }
 
 .btn-flat {
-  background-color: purple;
-  color: white;
-}
-.btn-xxl {
-  padding: 1rem 1.5rem;
-  font-size: 1.5rem;
+  background-color: #45d9e6;
+  color: #ffffff;
 }

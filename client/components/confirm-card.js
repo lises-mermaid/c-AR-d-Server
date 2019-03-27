@@ -38,27 +38,25 @@ class ConfirmCard extends Component {
   }
 
   render() {
+    console.log('STATE: ', this.state)
     return (
       <div>
         <h3>Review Card</h3>
         <h5>{this.state.cardTemplate.occasion}</h5>
-        <img src={this.state.cardTemplate.picture} />
+        <img src={this.state.cardTemplate.picture} width="120" />
         <label>Message</label>
-        <input
-          type="text"
+        <textarea
           name="message"
-          value={this.state.message}
+          rows="4"
+          cols="40"
+          maxLength="160"
           onChange={this.handleChange}
+          placeholder={this.state.message}
         />
         <label>Video</label>
         <br />
         <div>
-          <Button
-            variant="flat"
-            size="xxl"
-            type="submit"
-            onClick={this.handleSubmit}
-          >
+          <Button variant="flat" type="submit" onClick={this.handleSubmit}>
             Create Card
           </Button>
         </div>

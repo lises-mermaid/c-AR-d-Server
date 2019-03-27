@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {setNewCardVideo} from '../store'
+import Button from 'react-bootstrap/Button'
 
 class VideoUpload extends Component {
   constructor(props) {
@@ -28,7 +29,9 @@ class VideoUpload extends Component {
           </div>
           <br />
           <div>
-            <button type="submit">Upload</button>
+            <Button type="submit" variant="flat">
+              Upload
+            </Button>
           </div>
         </form>
       </div>
