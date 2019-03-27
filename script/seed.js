@@ -212,6 +212,18 @@ async function seed() {
       link:
         'https://s3.amazonaws.com/c-ar-d-videos/cards/do_not_delete_card.png',
       message: 'Hello'
+    }),
+    Card.create({
+      uuid: '3204b9c3-d4cd-4f2b-aa58-d705c24eb1fa',
+      senderId: 1,
+      receiverId: 2,
+      cardTemplateId: 6,
+      qrCode: `https://c-ar-d-server.herokuapp.com/api/cards/scan/3204b9c3-d4cd-4f2b-aa58-d705c24eb1fa`,
+      video:
+        'https://c-ar-d-videos.s3.amazonaws.com/videos/lcyaAkKdKfAGrqyDxLBgHw%3D%3DDO%20NOT%20DELETE-%20VERSION%202.mp4',
+      link:
+        'https://s3.amazonaws.com/c-ar-d-videos/cards/card-3204b9c3-d4cd-4f2b-aa58-d705c24eb1fa.png',
+      message: 'Congrats, Ash!\nLove,\nPikachu'
     })
   ])
 
