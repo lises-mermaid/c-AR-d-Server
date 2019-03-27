@@ -69,7 +69,6 @@ export default function(state = initialState, action) {
     case GET_ALL_CARD_TEMPLATES:
       return {...state, cardTemplates: action.cardTemplates}
     case GET_SINGLE_CARD:
-      console.log('ACTION: ', action.card)
       return {...state, singleCard: action.card}
     default:
       return state
