@@ -26,7 +26,6 @@ const Login = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">Log in with Google</a>
     </div>
   )
 }
