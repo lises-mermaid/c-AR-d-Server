@@ -62,7 +62,7 @@ router.post('/create', function(req, res) {
     card = await card.update({
       link: `https://s3.amazonaws.com/c-ar-d-videos/cards/card-${card.uuid}.png`
     })
-    return res.json({uri: card.link})
+    return res.json({link: card.link})
   })
 })
 

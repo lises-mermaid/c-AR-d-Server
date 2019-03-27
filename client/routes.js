@@ -10,7 +10,8 @@ import {
   SentCards,
   CardTemplates,
   CardMessage,
-  ConfirmCard
+  ConfirmCard,
+  FinishedCardView
 } from './components'
 
 import {me} from './store'
@@ -41,6 +42,7 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route path="/cards" component={SentCards} />
             <Route path="/confirm" component={ConfirmCard} />
+            <Route exact path="/finished-card" component={FinishedCardView} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

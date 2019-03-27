@@ -18,7 +18,7 @@ const initialState = {
   newCardTemplate: {},
   newCardMessage: '',
   newCardVideo: {},
-  singleCard: {}
+  singleCard: ''
 }
 
 //ACTION CREATORS
@@ -33,7 +33,7 @@ const getAllCardTemplates = cardTemplates => ({
   cardTemplates
 })
 
-const getSingleCard = card => ({
+export const getSingleCard = card => ({
   type: GET_SINGLE_CARD,
   card
 })
@@ -77,11 +77,12 @@ export const getAllCardTemplatesThunk = () => async dispatch => {
   }
 }
 
-export const createNewCardThunk = data => async dispatch => {
+export const createNewCardThunk = data2 => async dispatch => {
   try {
-    const {res} = await axios.post('/api/cards/create', data)
+    const {data} = await axios.post('/api/cards/create', data2)
+    console.log(data.link, 'THIS IS THE Card')
     dispatch(clearNewCardData())
-    dispatch(getSingleCard(res))
+    dispatch(getSingleCard(data))
   } catch (err) {
     console.error(err)
   }
@@ -101,6 +102,9 @@ export default function(state = initialState, action) {
       return {...state, newCardMessage: action.message}
     case SET_NEW_CARD_VIDEO:
       return {...state, newCardVideo: action.video}
+    case GET_SINGLE_CARD:
+      console.log(action.card.link)
+      return {...state, singleCard: action.card.link}
     default:
       return state
   }
