@@ -27,8 +27,7 @@ const uploadVideo = multer({
       let salt = crypto
         .randomBytes(16)
         .toString('base64')
-        .replace('/', '')
-        .replace('\\', '')
+        .replace(/\//gi, '')
 
       cb(null, 'videos/' + salt + file.originalname)
       console.log(file)
