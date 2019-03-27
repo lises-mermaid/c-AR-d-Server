@@ -52,7 +52,7 @@ const generatePic = async (
   ]
   let jimps = []
   // QR Code
-  function createQRFile() {
+  async function createQRFile() {
     return new Promise(resolve => {
       const writeToFile = fs.createWriteStream(images[1])
       qrImage.image(qrCodeLink, {type: 'png', size: 4}).pipe(writeToFile)
