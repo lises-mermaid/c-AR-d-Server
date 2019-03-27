@@ -6,11 +6,8 @@ import {
   Login,
   SignUp,
   UserHome,
-  VideoUpload,
   SentCards,
   CardTemplates,
-  CardMessage,
-  ConfirmCard,
   CreateCard
 } from './components'
 

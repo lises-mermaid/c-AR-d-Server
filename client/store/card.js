@@ -4,10 +4,6 @@ import axios from 'axios'
 
 const GET_ALL_SENT_CARDS = 'GET_ALL_SENT_CARDS'
 const GET_ALL_CARD_TEMPLATES = 'GET_ALL_CARD_TEMPLATES'
-const SET_NEW_CARD_TEMPLATE = 'SET_NEW_CARD_TEMPLATE'
-const SET_NEW_CARD_MESSAGE = 'SET_NEW_CARD_MESSAGE'
-const SET_NEW_CARD_VIDEO = 'SET_NEW_CARD_VIDEO'
-const CLEAR_NEW_CARD_DATA = 'CLEAR_NEW_CARD_DATA'
 const GET_SINGLE_CARD = 'GET_SINGLE_CARD'
 
 //INITIAL STATE
@@ -15,9 +11,6 @@ const GET_SINGLE_CARD = 'GET_SINGLE_CARD'
 const initialState = {
   sentCards: [],
   cardTemplates: [],
-  newCardTemplate: {},
-  newCardMessage: '',
-  newCardVideo: {},
   singleCard: {}
 }
 
@@ -36,25 +29,6 @@ const getAllCardTemplates = cardTemplates => ({
 const getSingleCard = card => ({
   type: GET_SINGLE_CARD,
   card
-})
-
-export const setNewCardTemplate = cardTemplate => ({
-  type: SET_NEW_CARD_TEMPLATE,
-  cardTemplate
-})
-
-export const setNewCardMessage = message => ({
-  type: SET_NEW_CARD_MESSAGE,
-  message
-})
-
-export const setNewCardVideo = video => ({
-  type: SET_NEW_CARD_VIDEO,
-  video
-})
-
-const clearNewCardData = () => ({
-  type: CLEAR_NEW_CARD_DATA
 })
 
 //THUNKS
@@ -80,7 +54,6 @@ export const getAllCardTemplatesThunk = () => async dispatch => {
 export const createNewCardThunk = data => async dispatch => {
   try {
     const {res} = await axios.post('/api/cards/create', data)
-    dispatch(clearNewCardData())
     dispatch(getSingleCard(res))
   } catch (err) {
     console.error(err)
@@ -95,12 +68,6 @@ export default function(state = initialState, action) {
       return {...state, sentCards: action.cards}
     case GET_ALL_CARD_TEMPLATES:
       return {...state, cardTemplates: action.cardTemplates}
-    case SET_NEW_CARD_TEMPLATE:
-      return {...state, newCardTemplate: action.cardTemplate}
-    case SET_NEW_CARD_MESSAGE:
-      return {...state, newCardMessage: action.message}
-    case SET_NEW_CARD_VIDEO:
-      return {...state, newCardVideo: action.video}
     default:
       return state
   }

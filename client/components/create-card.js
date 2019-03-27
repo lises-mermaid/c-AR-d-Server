@@ -1,12 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getAllCardTemplatesThunk} from '../store'
+import {getAllCardTemplatesThunk, createNewCardThunk} from '../store'
 import {VideoUpload, CardTemplates, CardMessage, ConfirmCard} from '.'
-import {createNewCardThunk} from '../store'
-import Tab from 'react-bootstrap/Tab'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Nav from 'react-bootstrap/Nav'
+import {Tab, Row, Col, Nav} from 'react-bootstrap'
 
 class CreateCard extends Component {
   constructor(props) {
@@ -16,30 +12,21 @@ class CreateCard extends Component {
       message: '',
       video: {}
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.submitCard = this.submitCard.bind(this)
+    this.updateCard = this.updateCard.bind(this)
   }
 
   componentDidMount() {
+    console.log('State: ', this.state)
     this.props.getAllCardTemplates()
-    this.setState({
-      cardTemplate: this.props.cardTemplate,
-      message: this.props.message,
-      video: this.props.video
-    })
   }
 
-  selectCardTemplate(newCardTemplate) {
-    this.setState({...this.state, cardTemplate: newCardTemplate})
+  updateCard(cardProp, newValue) {
+    const newState = Object.assign(this.state, {[cardProp]: newValue})
+    this.setState(newState)
   }
 
-  handleChange(evt) {
-    evt.preventDefault()
-    this.setState({...this.state, message: evt.target.value})
-  }
-
-  handleSubmit(evt) {
-    evt.preventDefault()
+  submitCard() {
     const cardData = new FormData()
     cardData.append('cardTemplateId', this.state.cardTemplate.id)
     cardData.append('message', this.state.message)
@@ -78,16 +65,24 @@ class CreateCard extends Component {
             <Col sm={9}>
               <Tab.Content>
                 <Tab.Pane eventKey="select-template">
-                  <CardTemplates cardTemplates={this.props.cardTemplates} />
+                  <CardTemplates
+                    cardTemplates={this.props.cardTemplates}
+                    selectCardTemplate={this.updateCard}
+                  />
                 </Tab.Pane>
                 <Tab.Pane eventKey="write-message">
-                  <CardMessage />
+                  <CardMessage writeMessage={this.updateCard} />
                 </Tab.Pane>
                 <Tab.Pane eventKey="upload-video">
-                  <VideoUpload />
+                  <VideoUpload addVideo={this.updateCard} />
                 </Tab.Pane>
                 <Tab.Pane eventKey="confirm">
-                  <ConfirmCard />
+                  <ConfirmCard
+                    cardTemplate={this.state.cardTemplate}
+                    message={this.state.message}
+                    video={this.state.video}
+                    submitCard={this.submitCard}
+                  />
                 </Tab.Pane>
               </Tab.Content>
             </Col>
@@ -99,10 +94,7 @@ class CreateCard extends Component {
 }
 
 const mapStateToProps = state => ({
-  cardTemplates: state.card.cardTemplates,
-  cardTemplate: state.card.newCardTemplate,
-  message: state.card.newCardMessage,
-  video: state.card.newCardVideo
+  cardTemplates: state.card.cardTemplates
 })
 
 const mapDispatchToProps = dispatch => ({
