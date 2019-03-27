@@ -5,3 +5,8 @@ secrets.js
 .DS_Store
 npm-debug.log
 yarn-error.log
+
+# temp files
+temp/card-*
+temp/QRCode-*
+temp/message-*
