@@ -51,10 +51,10 @@ export const getAllCardTemplatesThunk = () => async dispatch => {
   }
 }
 
-export const createNewCardThunk = data => async dispatch => {
+export const createNewCardThunk = cardData => async dispatch => {
   try {
-    const {res} = await axios.post('/api/cards/create', data)
-    dispatch(getSingleCard(res))
+    const {data} = await axios.post('/api/cards/create', cardData)
+    dispatch(getSingleCard(data))
   } catch (err) {
     console.error(err)
   }
@@ -68,6 +68,9 @@ export default function(state = initialState, action) {
       return {...state, sentCards: action.cards}
     case GET_ALL_CARD_TEMPLATES:
       return {...state, cardTemplates: action.cardTemplates}
+    case GET_SINGLE_CARD:
+      console.log('ACTION: ', action.card)
+      return {...state, singleCard: action.card}
     default:
       return state
   }

@@ -23,6 +23,7 @@ class CreateCard extends Component {
 
   updateCard(cardProp, newValue) {
     const newState = Object.assign(this.state, {[cardProp]: newValue})
+    console.log('IM UPDATED: ', newState)
     this.setState(newState)
   }
 

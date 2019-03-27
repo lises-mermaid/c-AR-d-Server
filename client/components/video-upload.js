@@ -52,7 +52,7 @@ class VideoUpload extends Component {
               this.uploadInput = ref
             }}
             type="file"
-            onChange={() => this.readFile(this.uploadInput.files[0])}
+            // onChange={() => this.readFile(this.uploadInput.files[0])}
           />
           <br />
           <div>
