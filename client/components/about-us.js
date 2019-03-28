@@ -2,12 +2,7 @@ import React from 'react'
 
 const AboutUs = props => (
   <div>
-    <img
-      src="logo.png"
-      width="320"
-      alt="c-AR-d logo"
-      style="justify-content: center"
-    />
+    <img src="logo.png" width="320" alt="c-AR-d logo" />
     <h2>About Us</h2>
     <br />
     <p>
