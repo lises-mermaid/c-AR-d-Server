@@ -4,6 +4,7 @@ import {Container, Row, Col} from 'react-bootstrap'
 const CardTemplates = props => (
   <div>
     <h2>Select A Card</h2>
+    <br />
     <Container>
       <h5>Birthday</h5>
       <div>
@@ -24,6 +25,7 @@ const CardTemplates = props => (
             ))}
         </Row>
       </div>
+      <br />
       <h5>Wedding</h5>
       <div>
         <Row>
@@ -43,6 +45,7 @@ const CardTemplates = props => (
             ))}
         </Row>
       </div>
+      <br />
       <h5>Retirement</h5>
       <div>
         <Row>
@@ -62,6 +65,7 @@ const CardTemplates = props => (
             ))}
         </Row>
       </div>
+      <br />
       <h5>Baby Shower</h5>
       <div>
         <Row>
@@ -81,6 +85,7 @@ const CardTemplates = props => (
             ))}
         </Row>
       </div>
+      <br />
       <h5>Anniversary</h5>
       <div>
         <Row>
@@ -100,6 +105,7 @@ const CardTemplates = props => (
             ))}
         </Row>
       </div>
+      <br />
       <h5>Farewell</h5>
       <div>
         <Row>
