@@ -29,3 +29,7 @@ form div {
 .component-container {
   margin: 2em;
 }
+
+.selected-template {
+  background-color: aliceblue;
+}
