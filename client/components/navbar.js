@@ -25,6 +25,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               Logout
             </a> */}
             <Link to="/home">Home</Link>
+            <Link to="/about">About Us</Link>
             {/* <Link to="/cards">Card History</Link> */}
             <Link to="/create">Create A Card</Link>
           </div>
@@ -33,6 +34,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             {/* The navbar will show these links before you log in */}
             <Link to="/login">Login</Link>
             <Link to="/sign-up">Sign Up</Link>
+            <Link to="/about">About Us</Link>
           </div>
         )}
         {/* <Link to="/cardtemplates">Card Templates</Link> */}

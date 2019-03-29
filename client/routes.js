@@ -10,7 +10,8 @@ import {
   CardTemplates,
   CreateCard,
   SingleCard,
-  UserDashboard
+  UserDashboard,
+  About
 } from './components'
 
 import {me} from './store'
@@ -33,6 +34,7 @@ class Routes extends Component {
           <Route path="/login" component={Login} />
           <Route path="/sign-up" component={SignUp} />
           <Route path="/cardtemplates" component={CardTemplates} />
+          <Route path="/about" component={About} />
           {isLoggedIn && (
             <Switch>
               {/* Routes placed here are only available after logging in */}

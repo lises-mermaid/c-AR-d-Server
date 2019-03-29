@@ -33,3 +33,7 @@ form div {
 .selected-template {
   background-color: aliceblue;
 }
+
+.about {
+  margin: 0 auto;
+}

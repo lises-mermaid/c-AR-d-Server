@@ -1,7 +1,7 @@
 import React from 'react'
 
 const AboutUs = props => (
-  <div>
+  <div className="about">
     <img src="logo.png" width="320" alt="c-AR-d logo" />
     <h2>About Us</h2>
     <br />
