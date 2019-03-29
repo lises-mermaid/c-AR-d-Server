@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleCardThunk} from '../store'
+import Button from 'react-bootstrap/Button'
 
 class SingleCard extends Component {
   componentDidMount() {
@@ -17,6 +18,9 @@ class SingleCard extends Component {
           card, they can view the card with our mobile app <b>c-AR-d</b>!
         </h4>
         <img src={singleCard.link} alt="Your Card" height="500" />
+        <Button type="button" variant="flat">
+          Print Card
+        </Button>
       </div>
     )
   }
