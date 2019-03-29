@@ -66,6 +66,7 @@ class CreateCard extends Component {
                 <Tab.Pane eventKey="select-template">
                   <CardTemplates
                     cardTemplates={this.props.cardTemplates}
+                    selected={this.state.cardTemplate}
                     selectCardTemplate={this.updateCard}
                   />
                 </Tab.Pane>

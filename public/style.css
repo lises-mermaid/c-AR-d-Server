@@ -26,6 +26,57 @@ form div {
   color: #ffffff;
 }
 
+.sent-cards img {
+  box-shadow: 0 0 8px gray;
+}
+
+.sent-card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.sent-cards {
+  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .component-container {
   margin: 2em;
+}
+
+.selected-template img {
+  background-color: aliceblue;
+  box-shadow: 0 0 10px blue;
+  padding: 1px;
+}
+
+.template img {
+  box-shadow: 0 0 8px gray;
+  padding: 1px;
+}
+
+.about img {
+  display: block;
+  margin: 0 auto;
+}
+
+.about p,
+h2 {
+  text-align: center;
+}
+
+.single-card {
+  display: block;
+  margin: 0 auto;
+}
+
+.single-card img {
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 0 8px gray;
 }

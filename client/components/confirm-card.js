@@ -13,9 +13,12 @@ class ConfirmCard extends Component {
         <h3>Review Card</h3>
         <h5>{this.props.cardTemplate.occasion}</h5>
         <img src={this.props.cardTemplate.picture} width="120" />
+        <br />
         <label>Message</label>
         <div>{this.props.message}</div>
+        <br />
         <label>Video</label>
+        <div>{this.props.video.name}</div>
         <br />
         <div>
           <div>

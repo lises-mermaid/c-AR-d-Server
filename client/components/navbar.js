@@ -21,23 +21,17 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <div>
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-            <Link to="/cards">Card History</Link>
+            <Link to="/about">About Us</Link>
             <Link to="/create">Create A Card</Link>
-            {/* <Link to="/message">Message</Link>
-          <Link to="/upload">Upload</Link>
-          <Link to="/confirm">Confirm</Link> */}
           </div>
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
             <Link to="/login">Login</Link>
             <Link to="/sign-up">Sign Up</Link>
+            <Link to="/about">About Us</Link>
           </div>
         )}
-        {/* <Link to="/cardtemplates">Card Templates</Link> */}
       </NavbarStyle>
     </nav>
     <hr />
