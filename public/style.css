@@ -60,6 +60,12 @@ form div {
   padding: 1px;
 }
 
-.about {
+.about img {
+  display: block;
   margin: 0 auto;
+}
+
+.about p,
+h2 {
+  text-align: center;
 }
