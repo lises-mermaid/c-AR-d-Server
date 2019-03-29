@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Login,
@@ -31,6 +31,13 @@ class Routes extends Component {
       <div className="component-container">
         <Switch>
           {/* Routes placed here are available to all visitors */}
+          <Route
+            exact
+            path="/"
+            render={() =>
+              isLoggedIn ? <Redirect to="/home" /> : <Redirect to="/about" />
+            }
+          />
           <Route path="/login" component={Login} />
           <Route path="/sign-up" component={SignUp} />
           <Route path="/cardtemplates" component={CardTemplates} />
@@ -38,9 +45,7 @@ class Routes extends Component {
           {isLoggedIn && (
             <Switch>
               {/* Routes placed here are only available after logging in */}
-              {/* <Route path="/home" component={UserHome} /> */}
               <Route path="/home" component={UserDashboard} />
-              {/* <Route exact path="/cards" component={SentCards} /> */}
               <Route path="/cards/:uuid" component={SingleCard} />
               <Route path="/create" component={CreateCard} />
             </Switch>
