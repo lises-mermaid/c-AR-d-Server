@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const {Card, CardTemplate} = require('../db/models')
-const {generatePic, videoUpload, cardUpload} = require('../utils')
+const {generatePic, videoUpload, cardUpload, wrap} = require('../utils')
 
 module.exports = router
 
@@ -32,7 +32,7 @@ router.post('/create', function(req, res) {
 
     let card = await Card.create({
       senderId: req.user.id,
-      message: req.body.message,
+      message: wrap(req.body.message, 20),
       cardTemplateId: req.body.cardTemplateId,
       video: req.file.location
     })

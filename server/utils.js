@@ -65,7 +65,7 @@ const generatePic = async (
     images[2],
     text2png(message, {
       color: 'black',
-      font: '42px "Comic Sans MS", cursive, sans-serif',
+      font: '42px "Lucida Console", Monaco, monospace',
       lineSpacing: 10,
       textAlign: 'center'
     })
@@ -117,8 +117,31 @@ const cardUpload = async uuid => {
     })
   })
 }
+// turn one long string into a multi-line string
+const wrap = (line, maxLen) => {
+  if (line.length <= maxLen) {
+    return line
+  }
+
+  const indexOfBlank = line.lastIndexOf(' ', maxLen)
+  let split, offset
+  if (indexOfBlank > -1) {
+    split = indexOfBlank
+    offset = 1
+  } else {
+    split = maxLen
+    offset = 0
+  }
+
+  return (
+    line.substring(0, split) +
+    '\n' +
+    wrap(line.substring(split + offset), maxLen)
+  )
+}
 module.exports = {
   generatePic,
   videoUpload,
-  cardUpload
+  cardUpload,
+  wrap
 }
