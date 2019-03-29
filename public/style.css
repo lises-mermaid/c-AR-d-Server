@@ -26,12 +26,23 @@ form div {
   color: #ffffff;
 }
 
+.sent-cards img {
+  box-shadow: 0 0 8px gray;
+}
+
 .component-container {
   margin: 2em;
 }
 
-.selected-template {
+.selected-template img {
   background-color: aliceblue;
+  box-shadow: 0 0 10px blue;
+  padding: 1px;
+}
+
+.template img {
+  box-shadow: 0 0 8px gray;
+  padding: 1px;
 }
 
 .about {
