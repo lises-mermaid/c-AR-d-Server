@@ -14,7 +14,7 @@ class SentCards extends Component {
     return (
       <div>
         <h2>Card History</h2>
-        <div>
+        <div className="sent-card-container">
           {this.props.sentCards.map(card => (
             <div key={card.uuid} className="sent-cards">
               <Media>
@@ -25,7 +25,7 @@ class SentCards extends Component {
                   className="align-self-center mr-3"
                 />
                 <Media.Body>
-                  {card.message ? <p>message: "{card.message}"</p> : <br />}
+                  {card.message ? <p>"{card.message}"</p> : <br />}
                   <p>
                     <a href={card.video}>video</a>
                   </p>
