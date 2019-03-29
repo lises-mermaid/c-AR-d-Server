@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {signUp} from '../store'
+import Button from 'react-bootstrap/Button'
 
 const SignUp = props => {
   const {handleSubmit, error} = props
@@ -28,7 +29,9 @@ const SignUp = props => {
           <input name="password" type="password" />
         </div>
         <div>
-          <button type="submit">Sign Up</button>
+          <Button type="submit" variant="flat">
+            Sign Up
+          </Button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
