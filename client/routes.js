@@ -9,7 +9,8 @@ import {
   SentCards,
   CardTemplates,
   CreateCard,
-  SingleCard
+  SingleCard,
+  UserDashboard
 } from './components'
 
 import {me} from './store'
@@ -35,8 +36,9 @@ class Routes extends Component {
           {isLoggedIn && (
             <Switch>
               {/* Routes placed here are only available after logging in */}
-              <Route path="/home" component={UserHome} />
-              <Route exact path="/cards" component={SentCards} />
+              {/* <Route path="/home" component={UserHome} /> */}
+              <Route path="/home" component={UserDashboard} />
+              {/* <Route exact path="/cards" component={SentCards} /> */}
               <Route path="/cards/:uuid" component={SingleCard} />
               <Route path="/create" component={CreateCard} />
             </Switch>

@@ -16,13 +16,11 @@ const UserDashboard = props => (
             <Nav.Item>
               <Nav.Link eventKey="card-history">Card History</Nav.Link>
             </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="logout">
-                <a href="#" onClick={props.handleClick}>
-                  Logout
-                </a>
-              </Nav.Link>
-            </Nav.Item>
+            <a href="#" onClick={props.handleClick}>
+              <Nav.Item>
+                <Nav.Link eventKey="logout">Logout</Nav.Link>
+              </Nav.Item>
+            </a>
           </Nav>
         </Col>
         <Col sm={9}>
