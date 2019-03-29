@@ -32,7 +32,6 @@ class ConfirmCard extends Component {
                 </div>
               ) : (
                 <Button
-                  variant="flat"
                   type="submit"
                   onClick={evt => {
                     evt.preventDefault()

@@ -23,9 +23,7 @@ const Login = props => {
           <input name="password" type="password" />
         </div>
         <div>
-          <Button type="submit" variant="flat">
-            Log in
-          </Button>
+          <Button type="submit">Log in</Button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
