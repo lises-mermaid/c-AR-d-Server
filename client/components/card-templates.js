@@ -157,6 +157,10 @@ const CardTemplates = props => {
           </Row>
         </div>
       </Container>
+      <div className="footer">
+        * Card templates from{' '}
+        <a href="https://www.greetingsisland.com/">Greetings Island</a>
+      </div>
     </div>
   )
 }

@@ -19,9 +19,7 @@ const CardMessage = props => (
           placeholder="Your Message (optional)"
         />
         <br />
-        <Button type="submit" variant="flat">
-          Submit
-        </Button>
+        <Button type="submit">Submit</Button>
       </form>
     </div>
   </div>

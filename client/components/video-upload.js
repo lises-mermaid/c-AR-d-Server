@@ -25,9 +25,7 @@ class VideoUpload extends Component {
           />
           <br />
           <div>
-            <Button type="submit" variant="flat">
-              Upload
-            </Button>
+            <Button type="submit">Upload</Button>
           </div>
         </form>
       </div>

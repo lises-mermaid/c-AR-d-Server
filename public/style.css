@@ -21,11 +21,6 @@ form div {
   display: inline-block;
 }
 
-.btn-flat {
-  background-color: #45d9e6;
-  color: #ffffff;
-}
-
 .sent-cards img {
   box-shadow: 0 0 8px gray;
 }
@@ -34,7 +29,7 @@ form div {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: start;
   width: 100%;
 }
 
@@ -43,6 +38,15 @@ form div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 300px;
+  margin: 0.5%;
+}
+
+.card-message {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 150px;
+  white-space: nowrap;
 }
 
 .component-container {
@@ -79,4 +83,8 @@ h2 {
   display: block;
   margin: 0 auto;
   box-shadow: 0 0 8px gray;
+}
+.footer {
+  margin-top: 50px;
+  text-align: center;
 }

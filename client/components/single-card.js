@@ -19,9 +19,7 @@ class SingleCard extends Component {
         </h4>
         <div className="image-to-print">
           <img src={singleCard.link} alt="Your Card" height="500" />
-          <Button type="button" variant="flat">
-            Print Card
-          </Button>
+          <Button type="button">Print Card</Button>
         </div>
       </div>
     )
