@@ -11,16 +11,18 @@ class SingleCard extends Component {
   render() {
     let singleCard = this.props.singleCard
     return (
-      <div>
+      <div className="single-card">
         <h2>Print your Card!</h2>
         <h4>
           Once printed be sure to hand to your recipient! Once they have the
           card, they can view the card with our mobile app <b>c-AR-d</b>!
         </h4>
-        <img src={singleCard.link} alt="Your Card" height="500" />
-        <Button type="button" variant="flat">
-          Print Card
-        </Button>
+        <div className="image-to-print">
+          <img src={singleCard.link} alt="Your Card" height="500" />
+          <Button type="button" variant="flat">
+            Print Card
+          </Button>
+        </div>
       </div>
     )
   }
