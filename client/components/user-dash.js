@@ -6,7 +6,7 @@ import {Tab, Row, Col, Nav} from 'react-bootstrap'
 
 const UserDashboard = props => (
   <div>
-    <Tab.Container id="left-tabs-example" defaultActiveKey="select-template">
+    <Tab.Container id="left-tabs-example" defaultActiveKey="card-history">
       <Row>
         <Col sm={3}>
           <Nav variant="tabs" className="flex-column">
